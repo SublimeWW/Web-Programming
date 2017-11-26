@@ -9,6 +9,6 @@ Any commit will be welcome.
 I make tutorial course for probee on this area. everyone will easily understand and make their own page using our code. If you have any idea or question on this code, please commit or email to develop@pillowstudio.co.kr. Any idea will be open to us.
 
 # Tutorial Course
-We make tutorial course for probee. we seperate code for its own purpose. for example, if you want make header like our style, you can easily see our header code just acesss to Making Header(https://github.com/iknowSteven/Web-Programming/tree/master/Tutorial/Making%20Header).
+We make tutorial course for probee. We seperate code for its own purpose. for example, if you want make header like our style, you can easily see our header code just acesss to Making Header(https://github.com/iknowSteven/Web-Programming/tree/master/Tutorial/Making%20Header).
 All Tutorial is here.
 1. Making Header: https://github.com/iknowSteven/Web-Programming/tree/master/Tutorial/Making%20Header
