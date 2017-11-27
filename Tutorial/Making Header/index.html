@@ -2,13 +2,18 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Header Tutorial</title>
-<link rel="stylesheet" type="text/css" href="css/universial_header.css">
+<title>Making Header</title>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
+<link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:400,600,700,900" rel="stylesheet"> 
+<link rel="stylesheet" type="text/css" href="css/uni_html.css">
+<link rel="stylesheet" type="text/css" href="css/uni_header.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
 	<header id="uni_header_background">
 		<div id="uni_header_container">
+			<!--Desktop Header-->
 			<a href="http://www.pillowstudio.co.kr">
 				<img id="uni_header_logo" src="image/pillowstudio_logo.svg" alt ="Pillow Studio">
 			</a>
@@ -23,7 +28,19 @@
 			</nav>
 			<img id="uni_header_login" src="image/login.svg" alt ="Login">
 			<img id="uni_header_search" src="image/search.svg" alt ="Search">
+			
+			<!--Mobile Header-->
+			<div id="uni_header_hamburger_container">
+				<a href="#">
+					<span id="uni_header_hamburger_bar1"></span>
+					<span id="uni_header_hamburger_bar2"></span>
+				</a>
+			</div>
+			<div id="uni_header_modal_container">
+				<nav id="uni_header_modal" class="uni_header_modal"></nav>
+			</div>
 		</div>
 	</header>
+	<script src="js/universial/header/uni_header_hamburger.js"></script>
 </body>
 </html>

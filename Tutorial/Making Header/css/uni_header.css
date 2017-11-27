@@ -64,12 +64,6 @@
 	position: absolute; right: 0px; top: 13px;
 }
 
-@media (max-width: 904px) {
-	#uni_header_nav_container {
-		display: none;
-	}
-}
-
 #uni_header_nav_container {
 	width: auto; height: 50px;
 	line-height: 50px;
@@ -87,6 +81,7 @@
 #uni_header_nav_container li {
 	display: inline-block;
 	margin-right: 25px;
+	font-family: 'NanumSquare', sans-serif;
 	font-size: 15px; font-weight: 400;
 }
 
@@ -118,3 +113,83 @@
 	text-decoration: none;
 	color: #909090;
 }
+
+@media (min-width: 905px) {
+	.card_clone {
+		display: none;
+	}
+}
+
+@media (max-width: 904px) {
+	.card_clone {
+		display: block;
+	}
+}
+
+@media (min-width: 905px) {
+	#uni_header_hamburger_container {
+		display: none;
+	}
+}
+
+@media (max-width: 904px) {
+	#uni_header_hamburger_container {
+		display: block; position: absolute; 
+		top: 20px; left: 0px;
+	}
+}
+	
+#uni_header_hamburger_container a {
+	display: block;
+}
+
+#uni_header_hamburger_container a span {
+	overflow:hidden;
+	display: block;
+	width: 22px; height:2px;
+  	margin-bottom:7px;
+	background: #FFFFFF;
+	transition: all 0.4s ease-in-out; -webkit-transition: all 0.4s ease-in-out;
+}
+	
+#uni_header_hamburger_container.after #uni_header_hamburger_bar1 {
+	ransform: translate(0, 3px) rotate(45deg);
+  	-webkit-transform: translate(0, 3px) rotate(45deg);
+  	-ms-transform: translate(0, 3px) rotate(45deg);
+}
+	
+	#uni_header_hamburger_container.after #uni_header_hamburger_bar2 {
+	transform: translate(0, -6px) rotate(-45deg);
+}
+	#uni_header_modal_container {
+		position: absolute; display: none;
+		width: 200%;
+		top: 50px; left: -20px;
+		background-color: rgba(0,38,32,0.90);
+		text-align: left;
+	}
+	
+	#uni_header_modal {
+		margin-top: 20px
+	}
+	
+	.uni_header_modal {
+		width: calc(100% - 40px); 
+		display: block;
+		list-style: none;
+		margin-left: 26px;
+		line-height: 40px;
+	}
+	
+	.uni_header_modal a:link {
+		text-decoration: none;
+		color: #FFFFFF;
+	}
+	.uni_header_modal a:visited {
+		text-decoration: none;
+		color: #FFFFFF;
+	}
+	.uni_header_modal a:active{
+		text-decoration: none;
+		color: #FFFFFF;
+	}
