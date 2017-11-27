@@ -2,7 +2,7 @@
 
 ## 1. Desktop 헤더
 
-![uni_header_background](F:\Cloud\Github\Web-Programming\Tutorial\Making Header\Tutorial Image\uni_header_background.png)
+![uni_header_background](Tutorial Image\uni_header_background.png)
 
 이 사진이 데스크톱에서 보는 Full Header 입니다.
 
