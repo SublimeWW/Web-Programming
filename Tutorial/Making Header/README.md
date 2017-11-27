@@ -6,7 +6,7 @@ typora-root-url: Tutorial Image
 
 ## 1. Desktop 헤더
 
-![uni_header_background](F:\Cloud\Github\Web-Programming\Tutorial\Making Header\Tutorial Image\uni_header_background.png)
+![uni_header_background](Tutorial Image\uni_header_background.png)
 
 이 사진이 데스크톱에서 보는 Full Header 입니다. 이 헤더의 특징은 다음과 같습니다.
 
@@ -42,4 +42,8 @@ text-align: center;
 ```
 margin: auto 속성을 통해 div를 (좌우)가운데 정렬을 하는 것입니다. 이 방법대로 홈페이지를 구성한다면 홈페이지 내의 width가 정의되지 모든 요소들까지도 한번에 정렬시킬 수 있습니다. 
 
+<<<<<<< HEAD
 #### 2.  position: relative와 absolute를 이용하여 div안에 div를 넣었습니다.
+=======
+### 1.  
+>>>>>>> 89dd9dd69bb2821a0ea206ab9cc49f193184e93f
