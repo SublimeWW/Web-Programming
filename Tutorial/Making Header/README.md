@@ -1,7 +1,3 @@
----
-typora-root-url: Tutorial Image
----
-
 #  Layer Design
 
 ## 1. Desktop 헤더
