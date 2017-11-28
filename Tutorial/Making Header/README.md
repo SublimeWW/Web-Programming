@@ -2,17 +2,13 @@
 
 ## 1. Desktop 헤더
 
-![uni_header_background](Tutorial Image\uni_header_background.png)
-
-이 사진이 데스크톱에서 보는 Full Header 입니다. 이 헤더의 특징은 다음과 같습니다.
-
-### 1. 두 개의 헤더로 구성하여 반응형 웹 구현을 더욱 쉽게 만들었습니다.
+### 1. 두 개의 Layer로 헤더를 구성하여 반응형 웹 구현을 더욱 쉽게 만들었습니다.
 
 이 헤더는 background와 container 레이어로 구성되어 있습니다. 물론 이 굳이 2개의 레이어로 쪼개지 않고서도 잘 작동하는 header를 만들 수 있습니다. 하지만 이 레이어를 둔 이유는 이 사이트의 반응형을 javascript를 최대한 고려하지 않고 만들기 위함입니다.
 
 현재 Pillow Studio 홈페이지를 background 레이어 없이 바로 만든다면, 반응형을 작업할 때, 로고, 검색 아이콘, 로그인 아이콘의 위치를 CSS의 calc 기능을 이용해서 만들어야 합니다. 
 
-#### #uni_header_background 
+##### #uni_header_background 
 ```css
 #uni_header_background {
   width: 100%; height: 50px;
@@ -32,8 +28,6 @@
 ```
 #### #uni_header_container
 
-![uni_header_background_basis](/uni_header_background_basis.png)
-
 ```css
 #uni_header_container {
   width: 1800px; height: 50px;
@@ -42,9 +36,9 @@
   text-align: center;
 }
 ```
-margin: auto 속성을 통해 div를 (좌우)가운데 정렬을 하는 것입니다. 이 방법대로 홈페이지를 구성한다면 홈페이지 내의 width가 정의되지 모든 요소들까지도 한번에 정렬시킬 수 있습니다.
+##### Layer를 2개로 나누고(부모 레이어: background, 자식 레이어: container), margin: auto; 속성을 통해 자식 레이어를 부모 레이어 안에서 가운데 정렬하는 것입니다. 
 
-이를 활용하여 만든 #uni_header_container의 반응형 웹 모델은 다음과 같습니다.
+이 방법대로 홈페이지를 구성한다면 홈페이지 내의 width가 정의되지 모든 요소들까지도 한번에 정렬시킬 수 있습니다. 이를 활용하여 만든 #uni_header_container의 반응형 웹 모델은 다음과 같습니다.
 
 #### #uni_header_container CSS 모델
 
@@ -75,19 +69,25 @@ margin: auto 속성을 통해 div를 (좌우)가운데 정렬을 하는 것입�
 }
 ```
 
-background 레이어와 container 레이어를 구분하였기 때문에 단순히 몇 줄만으로도 끊김없는 반응형 웹을 만들 수 있습니다. 즉 개발자는 #uni_header_container 안에서의 위치(상대적 위치)만 신경쓰면 된다는 것입니다.
+background 레이어와 container 레이어를 구분하였기 때문에 단순히 몇 줄만으로도 끊김없는 반응형 웹을 만들 수 있습니다.
+
+##### 즉 개발자는 #uni_header_container 안에서의 위치(상대적 위치)만 신경쓰면 된다는 것입니다.
 
 
 
 
 
-### 2. div 안에 div를 밀리지않고 배치하기 위해 position: absolute를 자식 요소에 적용하였습니다.
+### 2. div 안에 div를 밀리지않고 배치하기 위해 position: absolute; 를 자식 요소에 적용하였습니다.
 
-웹 개발자들이 처음 이 분야를 접할 때 맨 처음 고민하는 영역이기도 합니다. div의 박스 모델은 div가 겹쳐지게끔 허락하지 않습니다. 그렇기에 개발자들이 div안에 div를 배치하기위해 사용하는 기법이 여러가지 있습니다. 가장 많이 사용되어왔던것은 table cell처럼 div를 취급하는 방법입니다. 하지만 저희는 이 방법이 깔끔하다고 생각하지 않았기 때문에 다른 방법을 고안해냈습니다. 바로 children div에 position absolute 속성을 주는 것입니다.
+웹 개발자들이 처음 이 분야를 접할 때 맨 처음 고민하는 영역이기도 합니다. div의 박스 모델은 다른 여러 div가 겹쳐지지 못합니다. 그렇기에 개발자들이 div안에 div를 배치하기위해 사용하는 기법이 여러가지 있습니다.
 
-#### 간단한 예제를 통해 보여드리겠습니다. 아래 코드는 Header Source 코드가 아닙니다.
+가장 많이 사용되어왔던것은 table cell처럼 div를 취급하는 방법입니다. 하지만 저희는 이 방법이 깔끔하다고 생각하지 않았기 때문에 다른 방법을 고안해냈습니다. 
 
-#### #HTML
+##### 바로 children div에 position absolute; 속성을 주는 것입니다.
+
+간단한 예제를 통해 보여드리겠습니다. 아래 코드는 Header Source 코드가 아닙니다.
+
+##### #HTML
 
 ```html
 <div id="parent_1">
@@ -96,14 +96,14 @@ background 레이어와 container 레이어를 구분하였기 때문에 단순�
 	</div>
 </div>
 ```
-#### #Parent_1
+##### #Parent_1
 ```css
 #Parent_1 {
   width: 100%; height: 50px;
   background: #FF0004;
 }
 ```
-#### #Children_1
+##### #Children_1
 ```css
 #Children_1 {
   width: 100px; height: 50px;
@@ -112,11 +112,11 @@ background 레이어와 container 레이어를 구분하였기 때문에 단순�
   color: #FFFFFF;
 }
 ```
-이렇게 div를 설정하면 children div가 부모 요소 속에 잘 자리잡고 있음을 알 수 있습니다.
+이렇게 레이어(div)를 설정하면 자식 레이어가 부모 요소 속에 잘 자리잡고 있음을 알 수 있습니다.
 
-하지만 아래의 경우엔 children div가 아래로 밀리게 됩니다.
+하지만 아래의 경우엔 자식 레이어가 아래로 밀리게 됩니다.
 
-#### #HTML
+##### HTML
 
 	<div id="parent_1">
 		Parent
@@ -124,11 +124,11 @@ background 레이어와 container 레이어를 구분하였기 때문에 단순�
 			Children
 		</div>
 	</div>
-이런 현상은 parent div에 2가지 이상의 속성이 있을 때 일어납니다. 하지만, 저희의 header에는 레이어 2층엔 4개의 요소(logo, nav, login, search) 가 있습니다. 따라서 div가 밀리는 것을 방지하기 위해서 중앙정렬을 해야하는 div(nav)를 제외한 나머지 div에는 position: absolute를 주었습니다. 이렇게 되면 nav가 나머지 요소에 영향을 받지 않아 밀리지 않게 됩니다.
+이런 현상은 부모 레이어에 2가지 이상의 속성이 있을 때 일어납니다. 하지만, 저희의 header에는 레이어 2층엔 4개의 요소(logo, nav, login, search) 가 있습니다. 따라서 div가 밀리는 것을 방지하기 위해서 중앙정렬을 해야하는 div(nav)를 제외한 나머지 div에는 position: absolute; 를 주었습니다. 이렇게 되면 nav가 나머지 요소에 영향을 받지 않아 밀리지 않게 됩니다.
 
 따라서 저희가 적용한 방법은 다음과 같습니다.
 
-#### #HTML
+##### HTML
 
 ```
 <div id="parent_2">
@@ -139,7 +139,7 @@ background 레이어와 container 레이어를 구분하였기 때문에 단순�
 </div>
 ```
 
-#### #Parent_2
+##### #Parent_2
 
 ```css
 #Parent_2 {
@@ -148,7 +148,7 @@ background 레이어와 container 레이어를 구분하였기 때문에 단순�
 }
 ```
 
-#### #Children_2
+##### #Children_2
 
 ```css
 #Children_2 {
@@ -159,7 +159,7 @@ background 레이어와 container 레이어를 구분하였기 때문에 단순�
 }
 ```
 
-#### #Children_absolute
+##### #Children_absolute
 
 ```css
 #Children_absolute {
@@ -167,9 +167,7 @@ background 레이어와 container 레이어를 구분하였기 때문에 단순�
 }
 ```
 
-이렇게 div를 설정하면 children div가 부모 요소 속에 잘 자리잡고 있음을 알 수 있습니다.
-
-#### 이를 활용한 저희의 코드는 다음과 같습니다.
+이렇게 이렇게 레이어를 설정하면 자식 레이어가 여러개가 있어도 모두 부모 요소 속에 잘 자리잡고 있음을 알 수 있습니다. 이를 활용한 저희 홈페이지 코드는 다음과 같습니다.
 
 #### HTML
 
@@ -196,25 +194,13 @@ background 레이어와 container 레이어를 구분하였기 때문에 단순�
 
 #### #uni_header_background
 
-```html
-<header id="uni_header_background">
-	<div id="uni_header_container">
-		<a href="http://www.pillowstudio.co.kr">
-			<img id="uni_header_logo" src="image/pillowstudio_logo.svg">
-		</a>
-		<nav id="uni_header_nav_container">
-			<li><a href="crew.html">서비스</a></li>
-			<li><a href="product.html">인공지능</a></li>
-			<li><a href="product.html">보안</a></li>
-			<li><a href="lab.html">웹 개발</a></li>
-			<li><a href="product.html">개발자 센터</a></li>
-			<li><a href="support.html">크루</a></li>
-			<li><a href="support.html">고객 지원</a></li>
-		</nav>
-		<img id="uni_header_login" src="image/login.svg">
-		<img id="uni_header_search" src="image/search.svg">
-	</div>
-</header>
+```css
+#uni_header_background {
+	width: 100%; height: 50px;
+	background: rgba(0,38,32,0.90);
+	position: fixed;
+	z-index: 100;
+}
 ```
 
 #### #uni_header_container
@@ -267,15 +253,15 @@ background 레이어와 container 레이어를 구분하였기 때문에 단순�
 }
 ```
 
-이 때 position: relative를 parent div에 적용한 이유는 다음 장에서 알려드리겠습니다.
+이 때 position: relative; 를 부모 레이어에 적용한 이유는 다음 장에서 알려드리겠습니다.
 
 
 
 
 
-### 3. Children div를 Parent div 정렬에 맞추기 위해 position: relative를 부모요소에 적용하였습니다.
+### 3. 자식 레이어를 부모 레이어 정렬에 맞추기 위해 position: relative; 를 부모요소에 적용하였습니다.
 
-위에서 position: relative를 parent div에 적용한 이유가 궁금할 것입니다. 그 이유는 position: absolute가 적용된 자식 요소를 부모 컨테이너에 영향을 받아야 하기 때문입니다. 예시로 #uni_header_logo로 설명드리겠습니다. position: absolute 속성을 갖는 자식 요소는 모두 이와 같은 원리로 만들어졌습니다.
+위에서 position: relative; 를 부모 레이어에 적용한 이유가 궁금할 것입니다. 그 이유는 position: absolute; 가 적용된 자식 요소를 부모 컨테이너에 영향을 받아야 하기 때문입니다. 예시로 #uni_header_logo로 설명드리겠습니다. position: absolute; 속성을 갖는 자식 요소는 모두 이와 같은 원리로 만들어졌습니다.
 
 현재 #uni_header_container의 반응형 웹 설계는 다음과 같습니다.
 
@@ -343,9 +329,9 @@ background 레이어와 container 레이어를 구분하였기 때문에 단순�
 
 여기서 904px 이하 부분은 모바일 페이지 용이기 때문에 무시해도 됩니다. 여기서 집중해야 하는 부분은 905px 이상부분 입니다.
 
-만약 #uni_header_container(이하 Container)에 position: relative 속성을 없앤다면, #uni_header_logo(이하 Logo)에 position:absolute 속성이 있기 때문에 Logo가 Container의 위치를 무시하고 무조건 화면의 맨 왼쪽으로 가게 됩니다.
+##### 만약 #uni_header_container(이하 Container)에 position: relative; 속성을 없앤다면, #uni_header_logo(이하 Logo)에 position:absolute; 속성이 있기 때문에 Logo가 Container의 위치를 무시하고 무조건 화면의 맨 왼쪽으로 가게 됩니다.
 
-즉, Logo가 Container의 위치에 영향을 받게 하기 위해 Container에 position: relative 속성을 넣었습니다.
+##### 즉, Logo가 Container의 위치에 영향을 받게 하기 위해 Container에 position: relative; 속성을 넣었습니다.
 
 
 
@@ -355,3 +341,86 @@ background 레이어와 container 레이어를 구분하였기 때문에 단순�
 
 데스크톱 사이트에서 #uni_header_nav_container의 글자에 마우스를 올리거나 내리면 색이 흰색에서 회색으로, 회색에서 흰색으로 변하는 것을 볼 수 있습니다. 이 변화는 매우 부드럽고 우아합니다. 이를 저희는 CSS Trainsiton 요소를 활용하여 만들었습니다.
 
+#####uni_header_nav_container li
+```css
+#uni_header_nav_container li {
+  display: inline-block;
+  margin-right: 25px;
+  font-family: 'NanumSquare', sans-serif;
+  font-size: 15px; font-weight: 400;
+}
+```
+#####uni_header_nav_container li A:link 
+```css
+#uni_header_nav_container li A:link {
+  text-decoration: none;
+  color: #FFFFFF;
+}
+```
+#### #uni_header_nav_container li A:hover
+
+```css
+#uni_header_nav_container li A:hover {
+  text-decoration: none;
+  color: #909090;
+}
+```
+
+#####uni_header_nav_container li A:visited
+
+```css
+uni_header_nav_container li A:visited {
+  text-decoration: none;
+  color: #FFFFFF;
+}
+```
+#####uni_header_nav_container li A:active
+```css
+#uni_header_nav_container li A:active {
+  text-decoration: none;
+  color: #FFFFFF;
+}
+```
+#####uni_header_nav_container li A
+```css
+#uni_header_nav_container li A {
+  color: #FFFFFF;
+  -moz-transition: color .2s ease;
+  -o-transition: color .2s ease;
+  -ms-transition: color .2s ease;
+  -webkit-transition: color .2s ease;
+  transition: color .2s ease;
+}
+```
+##### 여기서 핵심은 가장 마지막에 있는 #uni_header_nav_container li A 입니다. transition 효과를 통해 hover 시켰을 때 효과를 부드럽게(ease) 주는 것입니다.
+
+1. color: #FFFFFF : Transition이 시작되는 색을 지정합니다. Transition이 끝나는 색은 #uni_header_nav_container li A:hover 에 color에 지정되어 있습니다.
+2. (-moz, -o, -ms, -webkit) -transition, transition : 각 브라우저들을 지원하는 코드입니다.
+3. color : 위에 정의한 색을 받아오는 변수 입니다.
+4. .2s : 변화 시간을 정해줍니다. 현재 0.2 초 입니다.
+5. ease : 부드럽게 변하는 효과입니다. Fade-In, Fade-Out을 생각하면 좋습니다.
+
+
+
+
+
+#### 5. position: fixed; 를 통해 Header를 상단에 계속 유지시켰습니다.
+
+Pillow Studio 홈페이지를 보면 Header가 항상 Window 최상단에 유지 됩니다. 이 것은 position: fixed; 를 통해 구현 하였습니다.
+
+#####uni_header_background
+	#uni_header_background {
+	  width: 100%; height: 50px;
+	  background: rgba(0,38,32,0.90);
+	  position: fixed;
+	  z-index: 100;
+	}
+
+
+
+
+## 2. Mobile 헤더
+
+Mobile 헤더에서 로고를 가운데로 보내고, 햄버거 메뉴와 로그인 아이콘, 검색 아이콘을 좌우로 배치하는 방법은 Desktop 헤더 부분의 2, 3 장과 같은 원리로 만들었습니다. 여기서는 햄버거 메뉴와 Modal에 관하여 다루겠습니다.
+
+### 1. 햄버거 메뉴와 Modal을 활용하여 Mobile 메뉴를 만들었습니다.
