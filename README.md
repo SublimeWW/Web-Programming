@@ -10,5 +10,5 @@ I make tutorial course for probee on this area. everyone will easily understand 
 
 # Tutorial Course
 We make tutorial course for probee. We seperate code for its own purpose. for example, if you want make header like our style, you can easily see our header code just acesss to Making Header(https://github.com/iknowSteven/Web-Programming/tree/master/Tutorial/Making%20Header).
-All Tutorial is here.
+All Tutorial is here. All developer(include probee) easily understand our code and discription.
 1. Making Header: https://github.com/iknowSteven/Web-Programming/tree/master/Tutorial/Making%20Header

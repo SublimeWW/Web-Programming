@@ -1,5 +1,9 @@
 #  Header 디자인
 
+Tutorial Course의 목적에 대해서 알고 싶다면 https://github.com/iknowSteven/Web-Programming 의 README 를 읽어보십시오. Tutorial Course에서는 이 사이트의 주요 기능 구현에 대한 상세한 설명을 담고 있습니다. 자신의 실력이 충분하다고 생각하는 분은 바로 Source Code를 봐도 좋습니다.
+
+이 프로젝트에 기여(Contribute)하고 싶으신 분은 Pull Request 하여 주십시오. 이 글은 Pillow Studio 개발자 센터 레퍼런스에도 올라갑니다. Pull Request가 오면 Pillow Studio Web 개발 팀에서 검토 후 적용 시키겠습니다. Request 가 받아들여지면 Pillow Studio 홈페이지에도 이름이 오르게 됩니다.
+
 ## 1. Desktop 헤더
 
 ### 1. 두 개의 Layer로 헤더를 구성하여 반응형 웹 구현을 더욱 쉽게 만들었습니다.
