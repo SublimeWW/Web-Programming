@@ -44,7 +44,7 @@
 ```
 margin: auto 속성을 통해 div를 (좌우)가운데 정렬을 하는 것입니다. 이 방법대로 홈페이지를 구성한다면 홈페이지 내의 width가 정의되지 모든 요소들까지도 한번에 정렬시킬 수 있습니다.
 
-현재 #uni_header_container의 반응형 웹 설계는 다음과 같습니다.
+이를 활용하여 만든 #uni_header_container의 반응형 웹 모델은 다음과 같습니다.
 
 #### #uni_header_container CSS 모델
 
@@ -75,11 +75,15 @@ margin: auto 속성을 통해 div를 (좌우)가운데 정렬을 하는 것입�
 }
 ```
 
+background 레이어와 container 레이어를 구분하였기 때문에 단순히 몇 줄만으로도 끊김없는 반응형 웹을 만들 수 있습니다. 즉 개발자는 #uni_header_container 안에서의 위치(상대적 위치)만 신경쓰면 된다는 것입니다.
+
+
+
 
 
 ### 2. div 안에 div를 밀리지않고 배치하기 위해 position: absolute를 자식 요소에 적용하였습니다.
 
-웹 개발자들이 처음 이 분야를 접할 때 맨 처음 고민하는 영역이기도 합니다. div의 박스 모델은 div가 겹쳐지게끔 허락하지 않습니다. 그렇기에 개발자들이 div안에 div를 배치하기위해 사용하는 기법이 여러가지 있습니다. 가장 많이 사용되어왔던것은 table cell처럼 div를 취급하는 방법입니다. 하지만 저희는 이 방법이 깔끔하다고 생각하지 않았기 때문에 다른 방법을 고안해냈습니다. 바로 parnet div에 position relative를, children div에 position absolute 속성을 주는 것입니다.
+웹 개발자들이 처음 이 분야를 접할 때 맨 처음 고민하는 영역이기도 합니다. div의 박스 모델은 div가 겹쳐지게끔 허락하지 않습니다. 그렇기에 개발자들이 div안에 div를 배치하기위해 사용하는 기법이 여러가지 있습니다. 가장 많이 사용되어왔던것은 table cell처럼 div를 취급하는 방법입니다. 하지만 저희는 이 방법이 깔끔하다고 생각하지 않았기 때문에 다른 방법을 고안해냈습니다. 바로 children div에 position absolute 속성을 주는 것입니다.
 
 #### 간단한 예제를 통해 보여드리겠습니다. 아래 코드는 Header Source 코드가 아닙니다.
 
@@ -223,6 +227,18 @@ margin: auto 속성을 통해 div를 (좌우)가운데 정렬을 하는 것입�
   z-index: 100;
 }
 ```
+#### #uni_header_nav_container
+
+```css
+#uni_header_nav_container {
+	width: auto; height: 50px;
+	line-height: 50px;
+	list-style: none;
+	margin-left: 15px;
+	display: inline-block;
+}
+```
+
 #### #uni_header_logo
 
 ```css
@@ -255,9 +271,11 @@ margin: auto 속성을 통해 div를 (좌우)가운데 정렬을 하는 것입�
 
 
 
+
+
 ### 3. Children div를 Parent div 정렬에 맞추기 위해 position: relative를 부모요소에 적용하였습니다.
 
-위에서 position: relative를 parent div에 적용한 이유가 궁금할 것입니다. 그 이유는 position: absolute가 적용된 자식 요소를 부모 컨테이너에 영향을 받아야 하기 때문입니다.
+위에서 position: relative를 parent div에 적용한 이유가 궁금할 것입니다. 그 이유는 position: absolute가 적용된 자식 요소를 부모 컨테이너에 영향을 받아야 하기 때문입니다. 예시로 #uni_header_logo로 설명드리겠습니다. position: absolute 속성을 갖는 자식 요소는 모두 이와 같은 원리로 만들어졌습니다.
 
 현재 #uni_header_container의 반응형 웹 설계는 다음과 같습니다.
 
@@ -290,5 +308,50 @@ margin: auto 속성을 통해 div를 (좌우)가운데 정렬을 하는 것입�
 }
 ```
 
-#### 
+위 모델을 요약해서 설명하면 다음과 같습니다.
+
+1. ~1970px: #uni_header_container(이하 Container)의 크기: 1800px, 화면 가운데 정렬.
+2. 1969px~1000px: Container의 크기: 화면 크기-140px, 화면 가운데 정렬, 좌우 여백 각각 70px.
+3. 999px~905px: Conainer의 크기: 825px,  화면 가운데 정렬, 좌우 여백이 70px에서 화면을 줄임에 따라 부드럽게 20px까지 줄어듬.
+4. 904px~: Container의 크기: 화면 크기-40px, 화면 가운데 정렬, 좌우 여백 각각 20px.
+
+그 다음, #uni_header_logo의 반응형 웹 설계는 다음과 같습니다.
+
+#### #uni_header_logo CSS 모델
+
+```css
+@media (min-width: 905px) {
+	#uni_header_logo {
+		width: auto; height: 30px;
+		position: absolute; left: 0px; top: 10px;
+		display: inline-block;
+	}
+} 
+
+@media (max-width: 904px) {
+	#uni_header_logo {
+		width: auto; height: 30px;
+		margin-top: 10px;
+	}
+}
+```
+
+위 모델을 요약해서 설명하면 다음과 같습니다.
+
+1. ~905px: Container요소(Background 아님)의 왼쪽에 딱 붙입니다.
+2. 904px~: Container요소의  중앙에 배치합니다.
+
+여기서 904px 이하 부분은 모바일 페이지 용이기 때문에 무시해도 됩니다. 여기서 집중해야 하는 부분은 905px 이상부분 입니다.
+
+만약 #uni_header_container(이하 Container)에 position: relative 속성을 없앤다면, #uni_header_logo(이하 Logo)에 position:absolute 속성이 있기 때문에 Logo가 Container의 위치를 무시하고 무조건 화면의 맨 왼쪽으로 가게 됩니다.
+
+즉, Logo가 Container의 위치에 영향을 받게 하기 위해 Container에 position: relative 속성을 넣었습니다.
+
+
+
+
+
+### 4. #uni_header_nav_container의 글자에 마우스를 hover 시켰을 때 색 변화를 Fade-in, Fade-Out 하기 위해 CSS Transtion 속성을 이용하였습니다.
+
+데스크톱 사이트에서 #uni_header_nav_container의 글자에 마우스를 올리거나 내리면 색이 흰색에서 회색으로, 회색에서 흰색으로 변하는 것을 볼 수 있습니다. 이 변화는 매우 부드럽고 우아합니다. 이를 저희는 CSS Trainsiton 요소를 활용하여 만들었습니다.
 
