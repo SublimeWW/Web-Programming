@@ -430,3 +430,146 @@ Pillow Studio 홈페이지를 보면 Header가 항상 Window 최상단에 유지
 Mobile 헤더에서 로고를 가운데로 보내고, 햄버거 메뉴와 로그인 아이콘, 검색 아이콘을 좌우로 배치하는 방법은 Desktop 헤더 부분의 2, 3 장과 같은 원리로 만들었습니다. 여기서는 햄버거 메뉴와 Modal에 관하여 다루겠습니다.
 
 ### 1. 햄버거 메뉴와 Modal을 활용하여 Mobile 메뉴를 만들었습니다.
+
+##### Javascript로 <li>를 복사하여 Mobile 모달 내의 내용을 얻고 불필요한 코드 중복을 방지했습니다.
+
+먼저 앞서본 Desktop용 헤더와는 다르게 Mobile을 위해 HTML구조를 변형했습니다. 그 차이점은 다음과 같습니다.
+
+HTML
+
+```html
+	<nav id="uni_header_nav_container">
+			<li><a href="crew.html">서비스</a></li>
+			<li><a href="product.html">인공지능</a></li>
+			<li><a href="product.html">보안</a></li>
+			<li><a href="lab.html">웹 개발</a></li>
+			<li><a href="product.html">개발자 센터</a></li>
+			<li><a href="support.html">크루</a></li>
+			<li><a href="support.html">고객 지원</a></li>
+		</nav>
+```
+
+Desktop용 헤더에서는 <li>를 이용하여 목록을 작성했습니다. 
+
+HTML
+
+```html
+	<div id="uni_header_hamburger_container">
+		<a href="#">
+			<span id="uni_header_hamburger_bar1"></span>
+			<span id="uni_header_hamburger_bar2"></span>
+		</a>
+	</div>
+		<div id="uni_header_modal_container">
+	<nav id="uni_header_modal" class="uni_header_modal"></nav>
+	</div>
+```
+
+반면, Mobile용 헤더는 훨씬 간소화된 모습을 볼 수 있습니다. 당연히 모바일 버전이니 로그인과 검색 아이콘을 없앤 것은 당연하고, Desktop용에서 보였던 <li>목록이 사라진 것을 알 수 있습니다. <li>태그 자리를 대신하여 들어간 <span>은 햄버거 아이콘을 위함입니다. 또한 모달을 위해 아래에 <div>태그가 달린것을 확인할 수 있습니다. 
+
+여기서 <li>목록을 제거한 이유는 같은 코드가 반복될 필요도 없거니와, 이후 수정하는 사람들에게 Desktop용 <li>의 텍스트만 편집하면 자동으로 Mobile 모달내의 텍스트도 변경되게 함으로써 편의를 제공히기 위함입니다. 
+
+그렇다면 어떤 방법으로 <li>의 텍스트를 복사할수 있을까요?  간단한 스크립트를 사용해 해결할 수 있습니다. 
+
+#### Javascript
+
+```javascript
+$('#uni_header_nav_container').find('li').clone(Node).addClass('card_clone').prependTo('.uni_header_modal');
+```
+
+ 먼저 Desktop용 HTML에서 ''#uni_header_nav_container' 를 셀렉트하여 하위 범위 주중 <li>를 모두 찾아 복사합니다. 그리고 이를 'prependTo()' 메서드를 통해 넣어줍니다. 이때, '.card_clone' 이라는 class를 추가해준 이유는 Desktop 화면에서 복사한 <li>를 숨기기 위해서였습니다. 
+
+#### .card_clone
+
+```css
+.card_clone {
+	@media (min-width: 905px) {.card_clone {display: none;}
+ }
+```
+
+```css
+.card_clone {
+	@media (max-width: 904px) {.card_clone {display: block;}
+}
+```
+
+이렇게 미디어 쿼리로 복사한 <li>를 보여주거나 가립니다. 
+
+
+
+### 2. 모달과 햄버거 메뉴를 활용하여 Mobile 헤더를 만들었습니다.
+
+이어서 모달을 생성하고 없애는 방법입니다.
+
+#### Javascript
+
+```javascript
+$(document).ready(function(){
+	$("#uni_header_hamburger_container").click(function(){
+		var submenu = $("#uni_header_modal_container");
+			if( submenu.is(":visible") ){
+				submenu.fadeOut(400);
+				enableScroll();
+			}else{
+				submenu.fadeIn(300);
+				$("#uni_header_modal_container").css('height', $(window).height());
+				disableScroll();
+	}
+});
+```
+
+햄버거 컨테이너가 클릭되었을 때  미리 CSS로 디자인된 모달창을 페이드인 하거나 페이드아웃 시켜줍니다. 여기서 'enableScroll()', 'disableScroll()' 이라는 함수를 호출하여 모달창이 전개되었을때 스크롤이 되지 못하게 해 줍니다. 
+
+> https://stackoverflow.com/questions/4770025/how-to-disable-scrolling-temporarily
+
+마지막으로 햄버거 아이콘을 클릭하였을때 나타나는 효과는 다음 코드로 구현합니다. 
+
+#### Javscript
+
+```javascript
+var submenu = $("#uni_header_modal_container");
+	$('#uni_header_hamburger_container').click(function(e){
+	e.preventDefault();
+		if( submenu.is(":visible") ){
+			$(this).removeClass("after");
+		}else{
+			$(this).addClass("after");
+		}
+	});
+});
+```
+
+#####uni_header_hamburger_container a span 
+
+```css
+#uni_header_hamburger_container a span { 
+	overflow:hidden;
+	display: block;
+	width: 22px; height:2px;
+	margin-bottom:7px;
+	background: #FFFFFF;
+	transition: all 0.4s ease-in-out; -webkit-transition: all 0.4s ease-in-out;
+}
+```
+
+#####uni_header_hamburger_container.after #uni_header_hamburger_bar1
+
+```css
+#uni_header_hamburger_container.after #uni_header_hamburger_bar1 {
+	ransform: translate(0, 3px) rotate(45deg);
+	-webkit-transform: translate(0, 3px) rotate(45deg);
+	-ms-transform: translate(0, 3px) rotate(45deg);
+}
+```
+
+#####uni_header_hamburger_container.after #uni_header_hamburger_bar2
+
+```css
+#uni_header_hamburger_container.after #uni_header_hamburger_bar2 {
+	transform: translate(0, -6px) rotate(-45deg);
+}
+```
+
+uni_header_hamburger_container a span' 에서는 햄버거 아이콘의 스타일을 지정하며, #uni_header_hamburger_container.after #uni_header_hamburger_bar1', #uni_header_hamburger_container.after #uni_header_hamburger_bar2'는 JS에서 제어되는 클래스로, 햄버거 아이콘 어떤 움직임으로 변화할지 지정합니다.
+
+본 코드 외에도 많은 햄버거 스타일들이 있으니 여러가지를 참조하셔도 좋습니다. 

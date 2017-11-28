@@ -187,7 +187,7 @@ html {
   background: #EFEFEF;
 }
 ```
-##### 이렇게 html에 background 속성을 준 이유는 footer에만 배경색을 줄 경우, footer_3에 배경색이 안들어가기 때문입니다. 이 버그는 추후 수정할 예정입니다.
+##### 이렇게 html에 background 속성을 준 이유는 footer에만 배경색을 줄 경우, footer_3에 배경색이 안 들어가기 때문입니다. 이 버그는 추후 수정할 예정입니다.
 
 #### footer
 

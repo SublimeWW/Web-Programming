@@ -1,432 +1,215 @@
-#  Header 디자인
+# CardUI 디자인
 
-Tutorial Course의 목적에 대해서 알고 싶다면 https://github.com/iknowSteven/Web-Programming 의 README 를 읽어보십시오. Tutorial Course에서는 이 사이트의 주요 기능 구현에 대한 상세한 설명을 담고 있습니다. 자신의 실력이 충분하다고 생각하는 분은 바로 Source Code를 봐도 좋습니다.
+## 1. Card UI 호버
 
-이 프로젝트에 기여(Contribute)하고 싶으신 분은 Pull Request 하여 주십시오. 이 글은 Pillow Studio 개발자 센터 레퍼런스에도 올라갑니다. Pull Request가 오면 Pillow Studio Web 개발 팀에서 검토 후 적용 시키겠습니다. Request 가 받아들여지면 Pillow Studio 홈페이지에도 이름이 오르게 됩니다.
+### 1. JS의 hover메서드를 이용해 호버를 구현했습니다. 
 
-## 1. Desktop 헤더
-
-### 1. 두 개의 Layer로 헤더를 구성하여 반응형 웹 구현을 더욱 쉽게 만들었습니다.
-
-이 헤더는 background와 container 레이어로 구성되어 있습니다. 물론 이 굳이 2개의 레이어로 쪼개지 않고서도 잘 작동하는 header를 만들 수 있습니다. 하지만 이 레이어를 둔 이유는 이 사이트의 반응형을 javascript를 최대한 고려하지 않고 만들기 위함입니다.
-
-현재 Pillow Studio 홈페이지를 background 레이어 없이 바로 만든다면, 반응형을 작업할 때, 로고, 검색 아이콘, 로그인 아이콘의 위치를 CSS의 calc 기능을 이용해서 만들어야 합니다. 
-
-##### #uni_header_background 
-```css
-#uni_header_background {
-  width: 100%; height: 50px;
-  position: absolute; right: calc(50% + 1010px); top: 5px;
-}
-```
-이런식으로 말입니다. 이것의 문제는 크기가 지정되지 않은 div 모델인 경우, Javascript를 이용해서 left-margin을 계산해서 css 모델에 대입해야 한다는 것입니다. 이는 잘 작동하기도 힘들고 사이트의 구동속도도 느리게 만듭니다. 그래서 저희가 생각한 방법은 다음과 같습니다.
-
-#### #uni_header_background 
-```css
-#uni_header_background {
-  width: 100%; height: 50px;
-  background: rgba(0,38,32,0.90);
-  position: fixed;
-  z-index: 100;
-}
-```
-#### #uni_header_container
-
-```css
-#uni_header_container {
-  width: 1800px; height: 50px;
-  margin: auto;
-  position: relative;
-  text-align: center;
-}
-```
-##### Layer를 2개로 나누고(부모 레이어: background, 자식 레이어: container), margin: auto; 속성을 통해 자식 레이어를 부모 레이어 안에서 가운데 정렬하는 것입니다. 
-
-이 방법대로 홈페이지를 구성한다면 홈페이지 내의 width가 정의되지 모든 요소들까지도 한번에 정렬시킬 수 있습니다. 이를 활용하여 만든 #uni_header_container의 반응형 웹 모델은 다음과 같습니다.
-
-#### #uni_header_container CSS 모델
-
-```css
-#uni_header_container {
-  width: 100%; height: 50px;
-  background: rgba(0,38,32,0.90);
-  position: fixed;
-  z-index: 100;
-}
-
-@media (max-width: 1969px) and (min-width: 1000px){
-	#uni_header_container {
-		width: calc(100% - 140px);
-	}
-}
-
-@media (max-width: 999px) and (min-width: 905px){
-	#uni_header_container {
-		width: 825px;
-	}
-}
-
-@media (max-width: 904px) {
-	#uni_header_container {
-		width: calc(100% - 40px);
-	}
-}
-```
-
-background 레이어와 container 레이어를 구분하였기 때문에 단순히 몇 줄만으로도 끊김없는 반응형 웹을 만들 수 있습니다.
-
-##### 즉 개발자는 #uni_header_container 안에서의 위치(상대적 위치)만 신경쓰면 된다는 것입니다.
-
-
-
-
-
-### 2. div 안에 div를 밀리지않고 배치하기 위해 position: absolute; 를 자식 요소에 적용하였습니다.
-
-웹 개발자들이 처음 이 분야를 접할 때 맨 처음 고민하는 영역이기도 합니다. div의 박스 모델은 다른 여러 div가 겹쳐지지 못합니다. 그렇기에 개발자들이 div안에 div를 배치하기위해 사용하는 기법이 여러가지 있습니다.
-
-가장 많이 사용되어왔던것은 table cell처럼 div를 취급하는 방법입니다. 하지만 저희는 이 방법이 깔끔하다고 생각하지 않았기 때문에 다른 방법을 고안해냈습니다. 
-
-##### 바로 children div에 position absolute; 속성을 주는 것입니다.
-
-간단한 예제를 통해 보여드리겠습니다. 아래 코드는 Header Source 코드가 아닙니다.
-
-##### #HTML
-
-```html
-<div id="parent_1">
-	<div id="children_1">
-		Children
-	</div>
-</div>
-```
-##### #Parent_1
-```css
-#Parent_1 {
-  width: 100%; height: 50px;
-  background: #FF0004;
-}
-```
-##### #Children_1
-```css
-#Children_1 {
-  width: 100px; height: 50px;
-  margin: auto;
-  background: #001DFF;
-  color: #FFFFFF;
-}
-```
-이렇게 레이어(div)를 설정하면 자식 레이어가 부모 요소 속에 잘 자리잡고 있음을 알 수 있습니다.
-
-하지만 아래의 경우엔 자식 레이어가 아래로 밀리게 됩니다.
-
-##### HTML
-
-	<div id="parent_1">
-		Parent
-		<div id="children_1">
-			Children
-		</div>
-	</div>
-이런 현상은 부모 레이어에 2가지 이상의 속성이 있을 때 일어납니다. 하지만, 저희의 header에는 레이어 2층엔 4개의 요소(logo, nav, login, search) 가 있습니다. 따라서 div가 밀리는 것을 방지하기 위해서 중앙정렬을 해야하는 div(nav)를 제외한 나머지 div에는 position: absolute; 를 주었습니다. 이렇게 되면 nav가 나머지 요소에 영향을 받지 않아 밀리지 않게 됩니다.
-
-따라서 저희가 적용한 방법은 다음과 같습니다.
-
-##### HTML
-
-```
-<div id="parent_2">
-	<span id="children_absolute">Parent</span>
-	<div id="children_2">
-		Children
-	</div>
-</div>
-```
-
-##### #Parent_2
-
-```css
-#Parent_2 {
-  width: 100%; height: 50px;
-  background: #FF0004;
-}
-```
-
-##### #Children_2
-
-```css
-#Children_2 {
-  width: 100px; height: 50px;
-  margin: auto;
-  background: #001DFF;
-  color: #FFFFFF;
-}
-```
-
-##### #Children_absolute
-
-```css
-#Children_absolute {
-  position: absolute;
-}
-```
-
-이렇게 이렇게 레이어를 설정하면 자식 레이어가 여러개가 있어도 모두 부모 요소 속에 잘 자리잡고 있음을 알 수 있습니다. 이를 활용한 저희 홈페이지 코드는 다음과 같습니다.
+이미지를 이용하여 Card 형식의 UI로 홈페이지를 구현했다면 이용자에게 정보를 보여주기 위해서는 호버창과 같은 방법을 이용하는 것이 좋습니다. 호버를 구현하기위한 CSS, JS 작성에 앞서 간단한 HTML구조 규칙이 필요합니다. 
 
 #### HTML
 
 ```html
-<header id="uni_header_background">
-	<div id="uni_header_container">
-		<a href="http://www.pillowstudio.co.kr">
-			<img id="uni_header_logo" src="image/pillowstudio_logo.svg">
-		</a>
-		<nav id="uni_header_nav_container">
-			<li><a href="crew.html">서비스</a></li>
-			<li><a href="product.html">인공지능</a></li>
-			<li><a href="product.html">보안</a></li>
-			<li><a href="lab.html">웹 개발</a></li>
-			<li><a href="product.html">개발자 센터</a></li>
-			<li><a href="support.html">크루</a></li>
-			<li><a href="support.html">고객 지원</a></li>
+<div class="index_cardui_card">		
+		<nav class="index_cardui_card_discription">
+			<h1>벡터를 이용한 단어 모델링</h1>
+			<p>Wire, NLP</p>
 		</nav>
-		<img id="uni_header_login" src="image/login.svg">
-		<img id="uni_header_search" src="image/search.svg">
+		<img src="image/cardui/1.jpg" class="index_cardui_card_image" alt="Wire">
 	</div>
-</header>
+	<div class="index_cardui_card">
+		<nav class="index_cardui_card_discription">
+			<h1>벡터를 이용한 단어 모델링</h1>
+			<p>Wire, NLP</p>
+		</nav>
+		<img src="image/cardui/2.jpg" class="index_cardui_card_image" alt="Wire">
+	</div>
+	<div class="index_cardui_card">
+		<nav class="index_cardui_card_discription">
+			<h1>벡터를 이용한 단어 모델링</h1>
+			<p>Wire, NLP</p>
+		</nav>
+		<img src="image/cardui/3.jpg" class="index_cardui_card_image" alt="Wire">
+	</div>
 ```
+위를 보시는 것과 같이, 매 <div>안에 <nav class="index_cardui_card_discription">를 넣어주어 호버창을 구현할 구조를 완성했습니다. <nav>안에는 호버에 들어갈 글자들이 <h1>태그와 <p>태그로 작성되어 있습니다.
 
-#### #uni_header_background
+요구되는 HTML구조가 간단한 만큼 CSS와 JS작성도 그리 어렵지 않습니다. 
+
+#### Javascript
+
+```javascript
+$(document).ready(function(){
+	$(".index_cardui_card").hover(function(){
+		var $ImageHeight = $(this).height();
+		var $ImageWidth = $(this).width();
+		$(this).find("nav").fadeIn(0);
+		$(".index_cardui_card_discription").css("margin-top", ($ImageHeight - 134) + "px");
+		$(".index_cardui_card_discription").css("width", ($ImageWidth) + "px");
+},	
+function(){
+	$(this).find("nav").fadeOut(0);
+		$(".index_cardui_card_discription").delay(0).css("margin-top", " ");
+}); });
+```
+안에 내용이 길어져서 그렇지 외관 구조는 아래와 같습니다.
+
+#### Javascript
+
+```javascript
+$('select').hover(function(){ //when mouse over }, function(){ //when mouse out })
+```
+쉼표를 기준으로 앞은 마우스가 객체에 호버되었을때, 쉼표 뒤는 마우스가 객체를 벗어났을 때의 영역입니다. 
+
+이를 바탕으로 JS는 다음과 같이 작성되어있습니다. 
+
+1. '$(this).height()' 과 '$(this).width()' 로 대상 객체의 너비, 높이를 구합니다.
+2. '$(this).find("nav").fadeIn(0)'로 호버된 대상 객체에서 하위 항목중 <nav>를 찾아 페이드인 합니다. 이때의 <nav>는 호버될 창 입니다. 앞서 보이지 않게 CSS로 'display: none' 처리 되어있습니다. 
+3. 호버창이 페이드인 되는 동시, 호버창의 크기와 위치를 지정해 줍니다. 'css("","")'메서드를 통해 CSS를 추가해주며 추가된 항목은 이미지 너비를 그대로 본딴 '($ImageWidth) + "px"'과, ''$ImageHeight - 134px' 만큼의 'margin-top'을 주었습니다. 
+4. 마우스가 객체를 벗어났을때 호버창은 페이드아웃 되며 'margin-top'은 초기화 됩니다. 
+
+
+
+적용한 CSS는 다음과 같습니다. 
+
+#### .index_cardui_card_discription
 
 ```css
-#uni_header_background {
-	width: 100%; height: 50px;
-	background: rgba(0,38,32,0.90);
-	position: fixed;
-	z-index: 100;
+.index_cardui_card_discription {
+	position: absolute; margin-top: 0px; z-index: 1;
+	height: 130px;
+	background: rgba(0,0,0,0.80);
+	display: none;
+}
+```
+호버창의 크기와 스타일을 지정합니다. 앞서 말한것 처럼 처음에 보이지 않게 CSS로 'display: none' 처리되어있는 것을 확인할 수 있습니다. 
+
+#### .index_cardui_card_image
+
+```css
+.index_cardui_card_image{
+	width: 100%; height: 100%;
+}
+```
+#### .index_cardui_card_discription
+
+```css
+.index_cardui_card_discription h1{
+	margin-left: 20px;
+	padding-top: 20px;
+	font-family: 'NanumSquare', sans-serif; font-size: 20px;
+}
+```
+#### .index_cardui_card_discription
+
+```css
+.index_cardui_card_discription p{
+	margin: 0px;
+	margin-left: 20px;
 }
 ```
 
-#### #uni_header_container
 
-```css
-#uni_header_container {
-  width: 100%; height: 50px;
-  background: rgba(0,38,32,0.90);
-  position: fixed;
-  z-index: 100;
-}
+## CardUI 가변 그리드
+
+### 1. column-count를 이용하여 가변 그리드를 구현하였습니다.
+
+가변 그리드를 구현한 목적은 다음 예제를 통해 보여드리겠습니다.
+
+#### HTML
+
+```html
+<section id="index_cardui_container">
+	<div class="index_cardui_card">
+		<nav class="index_cardui_card_discription">
+			<h1>벡터를 이용한 단어 모델링</h1>
+			<p>Wire, NLP</p>
+		</nav>
+		<img src="image/cardui/card_1.jpg" class="index_cardui_card_image" alt="Wire">
+	</div>
+	<div class="index_cardui_card">
+		<nav class="index_cardui_card_discription">
+			<h1>벡터를 이용한 단어 모델링</h1>
+			<p>Wire, NLP</p>
+		</nav>
+		<img src="image/cardui/card_1.jpg" class="index_cardui_card_image" alt="Wire">
+	</div>
+	<div class="index_cardui_card">
+		<nav class="index_cardui_card_discription">
+			<h1>벡터를 이용한 단어 모델링</h1>
+			<p>Wire, NLP</p>
+		</nav>
+		<img src="image/cardui/card_1.jpg" class="index_cardui_card_image" alt="Wire">
+	</div>
+	<div class="index_cardui_card">
+		<nav class="index_cardui_card_discription">
+			<h1>벡터를 이용한 단어 모델링</h1>
+			<p>Wire, NLP</p>
+		</nav>
+		<img src="image/cardui/card_1.jpg" class="index_cardui_card_image" alt="Wire">
+	</div>
+</section>
 ```
-#### #uni_header_nav_container
+#### .index_cardui_card 
 
 ```css
-#uni_header_nav_container {
-	width: auto; height: 50px;
-	line-height: 50px;
-	list-style: none;
-	margin-left: 15px;
-	display: inline-block;
-}
-```
-
-#### #uni_header_logo
-
-```css
-#uni_header_logo {
-  width: auto; height: 30px;
-  position: absolute; left: 0px; top: 10px;
+.index_cardui_card {
+  width: calc(25% - 15px); 
+  height: auto;
   display: inline-block;
+  margin-bottom: 20px;
 }
 ```
+위에서 볼 수 있듯이 저희는 맨 처음에 margin으로 그리드를 구현하려고 하였습니다. 하지만 이렇게 되면 항상 맨 오른쪽 카드와 window 사이의 거리가 본래 의도했던 것보다 margin만큼 더 띄어지게 됩니다. 이것을 자바스크립트로 Handling 하려고 하였으나 실패하였습니다.
 
-#### #uni_header_login
+#### Javascript
 
+```javascript
+$(document).ready(function(){
+  var n = $('.index_cardui_card').length;
+  if(n%4 == 0){
+      $(".index_cardui_card").css("margin-right", 10+"px");
+  } else {
+      $(".index_cardui_card").css("margin-right", 20+"px");
+  }
+  $(".index_cardui_card").hover(function(){
+  	var $ImageHeight = $(this).height();
+  	$(this).find("nav").fadeIn(0);
+  	$(".index_cardui_card_discription").css("margin-top", ($ImageHeight - 134) + "px");
+  },
+  function(){
+  	$(this).find("nav").fadeOut(0);
+  		$(".index_cardui_card_discription").delay(0).css("margin-top", " ");
+	});
+});
+```
+Jquery의 ( ).length 함수는 이미지의 개수는 세어주나, 매 n번째 이미지마다 효과를 줄 수는 없습니다. 따라서 다른 방법을 찾아봤습니다.
+
+##### 이 사이트에서 작동을 확인한 방법은 2가지 입니다.
+
+1. column
+2. display: flex
+
+이 중에서 저희는 column을 선택하였습니다. display: flex의 경우 다음 버전에 올리도록 하겠습니다.
+
+#####index_cardui_container
 ```css
-#uni_header_login {
-  width: auto; height: 24px;
-  position: absolute; right: 70px; top: 13px;
+#index_cardui_container {
+	column-count: 2;
+	-moz-column-count: 2;
+	-webkit-column-count: 2;
 }
 ```
+#### .index_cardui_card
 
-#### #uni_header_search
-
-```css
-#uni_header_search {
-  width: auto; height: 24px;
-  position: absolute; right: 0px; top: 13px;
-}
-```
-
-이 때 position: relative; 를 부모 레이어에 적용한 이유는 다음 장에서 알려드리겠습니다.
-
-
-
-
-
-### 3. 자식 레이어를 부모 레이어 정렬에 맞추기 위해 position: relative; 를 부모요소에 적용하였습니다.
-
-위에서 position: relative; 를 부모 레이어에 적용한 이유가 궁금할 것입니다. 그 이유는 position: absolute; 가 적용된 자식 요소를 부모 컨테이너에 영향을 받아야 하기 때문입니다. 예시로 #uni_header_logo로 설명드리겠습니다. position: absolute; 속성을 갖는 자식 요소는 모두 이와 같은 원리로 만들어졌습니다.
-
-현재 #uni_header_container의 반응형 웹 설계는 다음과 같습니다.
-
-#### #uni_header_container CSS 모델
-
-```css
-#uni_header_container {
-  width: 100%; height: 50px;
-  background: rgba(0,38,32,0.90);
-  position: fixed;
-  z-index: 100;
-}
-
-@media (max-width: 1969px) and (min-width: 1000px){
-	#uni_header_container {
-		width: calc(100% - 140px);
-	}
-}
-
-@media (max-width: 999px) and (min-width: 905px){
-	#uni_header_container {
-		width: 825px;
-	}
-}
-
-@media (max-width: 904px) {
-	#uni_header_container {
-		width: calc(100% - 40px);
-	}
-}
-```
-
-위 모델을 요약해서 설명하면 다음과 같습니다.
-
-1. ~1970px: #uni_header_container(이하 Container)의 크기: 1800px, 화면 가운데 정렬.
-2. 1969px~1000px: Container의 크기: 화면 크기-140px, 화면 가운데 정렬, 좌우 여백 각각 70px.
-3. 999px~905px: Conainer의 크기: 825px,  화면 가운데 정렬, 좌우 여백이 70px에서 화면을 줄임에 따라 부드럽게 20px까지 줄어듬.
-4. 904px~: Container의 크기: 화면 크기-40px, 화면 가운데 정렬, 좌우 여백 각각 20px.
-
-그 다음, #uni_header_logo의 반응형 웹 설계는 다음과 같습니다.
-
-#### #uni_header_logo CSS 모델
-
-```css
-@media (min-width: 905px) {
-	#uni_header_logo {
-		width: auto; height: 30px;
-		position: absolute; left: 0px; top: 10px;
+	.index_cardui_card {
+		height: auto;
 		display: inline-block;
+		margin-bottom: 20px;
+		cursor: pointer;
 	}
-} 
+여기서 주의할 점은 card의 크기를 지정하지 않았다는 것입니다. card의 크기를 지정하지 않아도 가로에 2개의 content를 두겠다고 선언했기 때문에 알아서 card의 크기가 줄어들게 됩니다.
 
-@media (max-width: 904px) {
-	#uni_header_logo {
-		width: auto; height: 30px;
-		margin-top: 10px;
-	}
-}
-```
+##### 하지만 여기에 버그가 있습니다. column 특성상 가로 첫 번째 줄이 채워져야 두 번째 줄이 채워지는 것이 아닌 세로 첫 번째 줄이 채워져야 세로 두 번째 줄이 채워집니다. 즉, 카드의 개수가 여러개일 때, 의도치 않은 배열이 나오게 됩니다. 이로 인해 저희는 카드의 가로 개수를 2개로만 설정했고, 이 버그는 추후에 Jquery 로 수정할 예정입니다.
 
-위 모델을 요약해서 설명하면 다음과 같습니다.
+##### display: flex의 경우에도 버그가 있습니다. 저희는 justify-content: space-between; 속성을 이용하였는데, 이렇게 되면 한 줄에 카드를 4장 배열할 때, 마지막 줄에 카드가 4장이 없으면 가운데가 비게 됩니다. (카드가 맨 왼쪽, 오른쪽부터 채워져 점점 가운데로 오면서 채워지게 됩니다) 이는 display: flex로 주고, justify-content: center; 를 이용, 각 card는 background와 content로 레이어를 구분하면 버그 없이 구현할 수 있을거 같습니다. 이는 다음 버전에 구현할 예정입니다.
 
-1. ~905px: Container요소(Background 아님)의 왼쪽에 딱 붙입니다.
-2. 904px~: Container요소의  중앙에 배치합니다.
-
-여기서 904px 이하 부분은 모바일 페이지 용이기 때문에 무시해도 됩니다. 여기서 집중해야 하는 부분은 905px 이상부분 입니다.
-
-##### 만약 #uni_header_container(이하 Container)에 position: relative; 속성을 없앤다면, #uni_header_logo(이하 Logo)에 position:absolute; 속성이 있기 때문에 Logo가 Container의 위치를 무시하고 무조건 화면의 맨 왼쪽으로 가게 됩니다.
-
-##### 즉, Logo가 Container의 위치에 영향을 받게 하기 위해 Container에 position: relative; 속성을 넣었습니다.
-
-
-
-
-
-### 4. #uni_header_nav_container의 글자에 마우스를 hover 시켰을 때 색 변화를 Fade-in, Fade-Out 하기 위해 CSS Transtion 속성을 이용하였습니다.
-
-데스크톱 사이트에서 #uni_header_nav_container의 글자에 마우스를 올리거나 내리면 색이 흰색에서 회색으로, 회색에서 흰색으로 변하는 것을 볼 수 있습니다. 이 변화는 매우 부드럽고 우아합니다. 이를 저희는 CSS Trainsiton 요소를 활용하여 만들었습니다.
-
-#### #uni_header_nav_container li
-```css
-#uni_header_nav_container li {
-  display: inline-block;
-  margin-right: 25px;
-  font-family: 'NanumSquare', sans-serif;
-  font-size: 15px; font-weight: 400;
-}
-```
-#### #uni_header_nav_container li A:link 
-```css
-#uni_header_nav_container li A:link {
-  text-decoration: none;
-  color: #FFFFFF;
-}
-```
-#### #uni_header_nav_container li A:hover
-
-```css
-#uni_header_nav_container li A:hover {
-  text-decoration: none;
-  color: #909090;
-}
-```
-
-#### #uni_header_nav_container li A:visited
-
-```css
-uni_header_nav_container li A:visited {
-  text-decoration: none;
-  color: #FFFFFF;
-}
-```
-#### #uni_header_nav_container li A:active
-```css
-#uni_header_nav_container li A:active {
-  text-decoration: none;
-  color: #FFFFFF;
-}
-```
-#### #uni_header_nav_container li A
-```css
-#uni_header_nav_container li A {
-  color: #FFFFFF;
-  -moz-transition: color .2s ease;
-  -o-transition: color .2s ease;
-  -ms-transition: color .2s ease;
-  -webkit-transition: color .2s ease;
-  transition: color .2s ease;
-}
-```
-##### 여기서 핵심은 가장 마지막에 있는 #uni_header_nav_container li A 입니다. transition 효과를 통해 hover 시켰을 때 효과를 부드럽게(ease) 주는 것입니다.
-
-1. color: #FFFFFF : Transition이 시작되는 색을 지정합니다. Transition이 끝나는 색은 #uni_header_nav_container li A:hover 에 color에 지정되어 있습니다.
-2. (-moz, -o, -ms, -webkit) -transition, transition : 각 브라우저들을 지원하는 코드입니다.
-3. color : 위에 정의한 색을 받아오는 변수 입니다.
-4. .2s : 변화 시간을 정해줍니다. 현재 0.2 초 입니다.
-5. ease : 부드럽게 변하는 효과입니다. Fade-In, Fade-Out을 생각하면 좋습니다.
-
-
-
-
-
-### 5. position: fixed; 를 통해 Header를 상단에 계속 유지시켰습니다.
-
-Pillow Studio 홈페이지를 보면 Header가 항상 Window 최상단에 유지 됩니다. 이 것은 position: fixed; 를 통해 구현 하였습니다.
-
-#####uni_header_background
-```css
-#uni_header_background {
-  width: 100%; height: 50px;
-  background: rgba(0,38,32,0.90);
-  position: fixed;
-  z-index: 100;
-}
-```
-
-
-
-
-## 2. Mobile 헤더
-
-Mobile 헤더에서 로고를 가운데로 보내고, 햄버거 메뉴와 로그인 아이콘, 검색 아이콘을 좌우로 배치하는 방법은 Desktop 헤더 부분의 2, 3 장과 같은 원리로 만들었습니다. 여기서는 햄버거 메뉴와 Modal에 관하여 다루겠습니다.
-
-### 1. 햄버거 메뉴와 Modal을 활용하여 Mobile 메뉴를 만들었습니다.

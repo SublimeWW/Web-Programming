@@ -4,7 +4,7 @@
 #index_cardui_name{
 	width: 1800px; height: 100px;
 	margin: auto;
-	font-size: 50px; font-weight: 700; line-height: 100px;
+	font-size: 50px; font-weight: 900; line-height: 100px;
 }
 
 @media (max-width: 1969px) and (min-width: 1000px){
@@ -29,23 +29,17 @@
 	width: 1800px; height: auto;
 	margin: auto;
 	color: #FFFFFF;
-	column-count: 4;
-	column-gap: 4px;
 }
 
-@media (max-width: 1599px) and (min-width: 1000px){
-	#index_cardui_container {
-		column-count: 3;
-	}
-}
-
-@media (max-width: 999px) and (min-width: 599px){
+@media (min-width: 800px) {
 	#index_cardui_container {
 		column-count: 2;
+		-moz-column-count: 2;
+		-webkit-column-count: 2;
 	}
 }
 
-@media (max-width : 598px ){
+@media (max-width : 799px ){
 	#index_cardui_container {
 		column-count: 1;
 	}
@@ -73,7 +67,7 @@
 	height: auto;
     display: inline-block;
 	margin-bottom: 20px;
-	vertical-align: top;
+	cursor: pointer;
 }
 
 @media (max-width: 1969px) and (min-width: 1000px){
