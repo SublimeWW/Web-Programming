@@ -46,7 +46,7 @@ margin: auto 속성을 통해 div를 (좌우)가운데 정렬을 하는 것입�
 
 #### 간단한 예제를 통해 보여드리겠습니다. 아래 코드는 Header Source 코드가 아닙니다.
 
-##### HTML
+#### #HTML
 
 ```html
 <div id="parent_1">
@@ -55,12 +55,12 @@ margin: auto 속성을 통해 div를 (좌우)가운데 정렬을 하는 것입�
 	</div>
 </div>
 ```
-######Parent_1
+#### #Parent_1
 ```css
 width: 100%; height: 50px;
 background: #FF0004;
 ```
-######Children_1
+#### #Children_1
 ```css
 width: 100px; height: 50px;
 margin: auto;
@@ -71,7 +71,7 @@ color: #FFFFFF;
 
 하지만 아래의 경우엔 children div가 아래로 밀리게 됩니다.
 
-##### HTML
+#### #HTML
 
 	<div id="parent_1">
 		Parent
@@ -83,7 +83,7 @@ color: #FFFFFF;
 
 따라서 저희가 적용한 방법은 다음과 같습니다.
 
-##### HTML
+#### #HTML
 
 ```
 <div id="parent_2">
@@ -94,14 +94,14 @@ color: #FFFFFF;
 </div>
 ```
 
-##### #Parent_2
+#### #Parent_2
 
 ```css
 width: 100%; height: 50px;
 background: #FF0004;
 ```
 
-##### #Children_2
+#### #Children_2
 
 ```css
 width: 100px; height: 50px;
@@ -110,7 +110,7 @@ background: #001DFF;
 color: #FFFFFF;
 ```
 
-##### #Children_absolute
+#### #Children_absolute
 
 ```css
 position: absolute;
@@ -120,7 +120,7 @@ position: absolute;
 
 #### 이를 활용한 저희의 코드는 다음과 같습니다.
 
-##### HTML
+#### HTML
 
 ```html
 <header id="uni_header_background">
@@ -143,7 +143,7 @@ position: absolute;
 </header>
 ```
 
-#####uni_header_background
+#### #uni_header_background
 
 ```html
 <header id="uni_header_background">
@@ -166,7 +166,7 @@ position: absolute;
 </header>
 ```
 
-##### uni_header_container
+#### #uni_header_container
 
 ```css
 width: 100%; height: 50px;
@@ -174,7 +174,7 @@ background: rgba(0,38,32,0.90);
 position: fixed;
 z-index: 100;
 ```
-##### uni_header_logo
+#### #uni_header_logo
 
 ```css
 width: auto; height: 30px;
@@ -182,14 +182,14 @@ position: absolute; left: 0px; top: 10px;
 display: inline-block;
 ```
 
-##### uni_header_login
+#### #uni_header_login
 
 ```css
 width: auto; height: 24px;
 position: absolute; right: 70px; top: 13px;
 ```
 
-##### uni_header_search
+#### #uni_header_search
 
 ```css
 width: auto; height: 24px;
