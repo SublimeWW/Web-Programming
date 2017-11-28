@@ -341,7 +341,7 @@ background 레이어와 container 레이어를 구분하였기 때문에 단순�
 
 데스크톱 사이트에서 #uni_header_nav_container의 글자에 마우스를 올리거나 내리면 색이 흰색에서 회색으로, 회색에서 흰색으로 변하는 것을 볼 수 있습니다. 이 변화는 매우 부드럽고 우아합니다. 이를 저희는 CSS Trainsiton 요소를 활용하여 만들었습니다.
 
-#####uni_header_nav_container li
+#### #uni_header_nav_container li
 ```css
 #uni_header_nav_container li {
   display: inline-block;
@@ -350,7 +350,7 @@ background 레이어와 container 레이어를 구분하였기 때문에 단순�
   font-size: 15px; font-weight: 400;
 }
 ```
-#####uni_header_nav_container li A:link 
+#### #uni_header_nav_container li A:link 
 ```css
 #uni_header_nav_container li A:link {
   text-decoration: none;
