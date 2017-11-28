@@ -1,0 +1,15 @@
+@charset "utf-8";
+/* CSS Document */
+html {
+	margin: 0px; padding: 0px;
+	background: #EFEFEF;
+}
+body {
+	margin: 0px; padding: 0px;
+	background: #FFFFFF;
+	font-family: 'NanumSquare', sans-serif;
+}
+
+footer {
+	background: #EFEFEF;
+}
