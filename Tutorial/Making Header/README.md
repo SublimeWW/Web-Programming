@@ -366,7 +366,7 @@ background 레이어와 container 레이어를 구분하였기 때문에 단순�
 }
 ```
 
-#####uni_header_nav_container li A:visited
+#### #uni_header_nav_container li A:visited
 
 ```css
 uni_header_nav_container li A:visited {
@@ -374,14 +374,14 @@ uni_header_nav_container li A:visited {
   color: #FFFFFF;
 }
 ```
-#####uni_header_nav_container li A:active
+#### #uni_header_nav_container li A:active
 ```css
 #uni_header_nav_container li A:active {
   text-decoration: none;
   color: #FFFFFF;
 }
 ```
-#####uni_header_nav_container li A
+#### #uni_header_nav_container li A
 ```css
 #uni_header_nav_container li A {
   color: #FFFFFF;
