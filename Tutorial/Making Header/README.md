@@ -404,7 +404,7 @@ uni_header_nav_container li A:visited {
 
 
 
-#### 5. position: fixed; 를 통해 Header를 상단에 계속 유지시켰습니다.
+### 5. position: fixed; 를 통해 Header를 상단에 계속 유지시켰습니다.
 
 Pillow Studio 홈페이지를 보면 Header가 항상 Window 최상단에 유지 됩니다. 이 것은 position: fixed; 를 통해 구현 하였습니다.
 
