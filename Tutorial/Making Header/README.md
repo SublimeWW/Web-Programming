@@ -122,27 +122,28 @@ position: absolute;
 
 ##### HTML
 
-	<header id="uni_header_background">
-		<div id="uni_header_container">
-			<a href="http://www.pillowstudio.co.kr">
-				<img id="uni_header_logo" src="image/pillowstudio_logo.svg">
-			</a>
-			<nav id="uni_header_nav_container">
-				<li><a href="crew.html">서비스</a></li>
-				<li><a href="product.html">인공지능</a></li>
-				<li><a href="product.html">보안</a></li>
-				<li><a href="lab.html">웹 개발</a></li>
-				<li><a href="product.html">개발자 센터</a></li>
-				<li><a href="support.html">크루</a></li>
-				<li><a href="support.html">고객 지원</a></li>
-			</nav>
-			<img id="uni_header_login" src="image/login.svg">
-			<img id="uni_header_search" src="image/search.svg">
-		</div>
-	</header>
-#####uni_header_background
+```html
+<header id="uni_header_background">
+	<div id="uni_header_container">
+		<a href="http://www.pillowstudio.co.kr">
+			<img id="uni_header_logo" src="image/pillowstudio_logo.svg">
+		</a>
+		<nav id="uni_header_nav_container">
+			<li><a href="crew.html">서비스</a></li>
+			<li><a href="product.html">인공지능</a></li>
+			<li><a href="product.html">보안</a></li>
+			<li><a href="lab.html">웹 개발</a></li>
+			<li><a href="product.html">개발자 센터</a></li>
+			<li><a href="support.html">크루</a></li>
+			<li><a href="support.html">고객 지원</a></li>
+		</nav>
+		<img id="uni_header_login" src="image/login.svg">
+		<img id="uni_header_search" src="image/search.svg">
+	</div>
+</header>
+```
 
-##### HTML
+#####uni_header_background
 
 ```html
 <header id="uni_header_background">
