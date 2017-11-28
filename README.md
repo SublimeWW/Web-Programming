@@ -12,4 +12,5 @@ I make tutorial course for probee on this area. everyone will easily understand 
 We make tutorial course for probee. We seperate code for its own purpose. for example, if you want make header like our style, you can easily see our header code just acesss to Making Header(https://github.com/iknowSteven/Web-Programming/tree/master/Tutorial/Making%20Header).
 All Tutorial is here. All developer(include probee) easily understand our code and discription.
 1. Making Header: https://github.com/iknowSteven/Web-Programming/tree/master/Tutorial/Making%20Header
-2. Making Footer: https://github.com/iknowSteven/Web-Programming/tree/master/Tutorial/Making%20Footer : Known Bug: Footer background color issues. (171129 checked, not fixed)
+2. Making Footer: https://github.com/iknowSteven/Web-Programming/tree/master/Tutorial/Making%20Footer
+  A. Known Bug: Footer background color issues. (171129 checked, not fixed)
