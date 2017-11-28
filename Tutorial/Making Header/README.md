@@ -141,23 +141,56 @@ position: absolute;
 		</div>
 	</header>
 #####uni_header_background
-	width: 100%; height: 50px;
-	background: rgba(0,38,32,0.90);
-	position: fixed;
-	z-index: 100;
-#####uni_header_container
-	width: 1800px; height: 50px;
-	margin: auto;
-	position: relative;
-	text-align: center;
-#####uni_header_logo
-		width: auto; height: 30px;
-		position: absolute; left: 0px; top: 10px;
-		display: inline-block;
-	}
-#####uni_header_login
-	width: auto; height: 24px;
-	position: absolute; right: 70px; top: 13px;
-#####uni_header_search
-	width: auto; height: 24px;
-	position: absolute; right: 0px; top: 13px;
+
+##### HTML
+
+```html
+<header id="uni_header_background">
+	<div id="uni_header_container">
+		<a href="http://www.pillowstudio.co.kr">
+			<img id="uni_header_logo" src="image/pillowstudio_logo.svg">
+		</a>
+		<nav id="uni_header_nav_container">
+			<li><a href="crew.html">서비스</a></li>
+			<li><a href="product.html">인공지능</a></li>
+			<li><a href="product.html">보안</a></li>
+			<li><a href="lab.html">웹 개발</a></li>
+			<li><a href="product.html">개발자 센터</a></li>
+			<li><a href="support.html">크루</a></li>
+			<li><a href="support.html">고객 지원</a></li>
+		</nav>
+		<img id="uni_header_login" src="image/login.svg">
+		<img id="uni_header_search" src="image/search.svg">
+	</div>
+</header>
+```
+
+##### uni_header_container
+
+```css
+width: 100%; height: 50px;
+background: rgba(0,38,32,0.90);
+position: fixed;
+z-index: 100;
+```
+##### uni_header_logo
+
+```css
+width: auto; height: 30px;
+position: absolute; left: 0px; top: 10px;
+display: inline-block;
+```
+
+##### uni_header_login
+
+```css
+width: auto; height: 24px;
+position: absolute; right: 70px; top: 13px;
+```
+
+##### uni_header_search
+
+```css
+width: auto; height: 24px;
+position: absolute; right: 0px; top: 13px;
+```
