@@ -13,4 +13,3 @@ We make tutorial course for probee. We seperate code for its own purpose. for ex
 All Tutorial is here. All developer(include probee) easily understand our code and discription.
 1. Making Header: https://github.com/iknowSteven/Web-Programming/tree/master/Tutorial/Making%20Header
 2. Making Footer: https://github.com/iknowSteven/Web-Programming/tree/master/Tutorial/Making%20Footer
-	A. Known Bug: Footer background color issues. (171129 checked, not fixed)
