@@ -86,17 +86,17 @@ background 레이어와 container 레이어를 구분하였기 때문에 단순�
 ##### #Parent_1
 ```css
 #Parent_1 {
-  width: 100%; height: 50px;
-  background: #FF0004;
+	width: 100%; height: 50px;
+	background: #FF0004;
 }
 ```
 ##### #Children_1
 ```css
 #Children_1 {
-  width: 100px; height: 50px;
-  margin: auto;
-  background: #001DFF;
-  color: #FFFFFF;
+	width: 100px; height: 50px;
+	margin: auto;
+	background: #001DFF;
+	color: #FFFFFF;
 }
 ```
 이렇게 레이어(div)를 설정하면 자식 레이어가 부모 요소 속에 잘 자리잡고 있음을 알 수 있습니다.
@@ -104,7 +104,7 @@ background 레이어와 container 레이어를 구분하였기 때문에 단순�
 하지만 아래의 경우엔 자식 레이어가 아래로 밀리게 됩니다.
 
 ##### HTML
-
+```html
 	<div id="parent_1">
 		Parent
 		<div id="children_1">
@@ -117,7 +117,7 @@ background 레이어와 container 레이어를 구분하였기 때문에 단순�
 
 ##### HTML
 
-```
+```html
 <div id="parent_2">
 	<span id="children_absolute">Parent</span>
 	<div id="children_2">
@@ -130,8 +130,8 @@ background 레이어와 container 레이어를 구분하였기 때문에 단순�
 
 ```css
 #Parent_2 {
-  width: 100%; height: 50px;
-  background: #FF0004;
+	width: 100%; height: 50px;
+	background: #FF0004;
 }
 ```
 
