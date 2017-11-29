@@ -263,7 +263,7 @@ Container내에 요소가 1개만 있을 땐 container안에 div가 잘 자리�
 
 1. ~1970px: #uni_header_container(이하 Container)의 크기: 1800px, 화면 가운데 정렬.
 2. 1969px~1000px: Container의 크기: Window(화면 크기) - 140px, 화면 가운데 정렬, 좌우 여백 각각 70px.
-3. 999px~905px: Conainer의 크기: 825px, 화면 가운데 정렬, 좌우 여백이 70px에서 화면을 줄임에 따라 부드럽게 20px까지 줄어듬.
+3. 999px~905px: Conainer의 크기: 825px, 화면 가운데 정렬, 좌우 여백이 70px에서 화면을 줄임에 따라 부드럽게 20px까지 줄어.
 4. 904px~: Container의 크기: Window - 40px, 화면 가운데 정렬, 좌우 여백 각각 20px.
 
 그 다음, #uni_header_logo의 반응형 웹 설계는 다음과 같습니다.
