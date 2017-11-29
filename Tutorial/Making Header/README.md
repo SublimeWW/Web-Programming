@@ -1,3 +1,4 @@
+
 #  Header 디자인
 
 Tutorial Course의 목적에 대해서 알고 싶다면 https://github.com/iknowSteven/Web-Programming 의 README 를 읽어보십시오. Tutorial Course에서는 이 사이트의 주요 기능 구현에 대한 상세한 설명을 담고 있습니다. 자신의 실력이 충분하다고 생각하는 분은 바로 Source Code를 봐도 좋습니다.
@@ -12,7 +13,7 @@ Tutorial Course의 목적에 대해서 알고 싶다면 https://github.com/iknow
 ##### #uni_header_background 
 ```css
 #test_div {
-  position: absolute; right: calc(50% + 1010px);
+	position: absolute; right: calc(50% + 1010px);
 }
 ```
 이것의 문제는 크기가 지정되지 않은 div 모델(예를 들어 %로 사이즈를 지정)인 경우, Javascript를 이용하더라도 test_div를 원하는 곳에 위치시키기 힘듭니다. 따라서 저희가 생각해낸 방법은 다음과 같습니다.
@@ -26,19 +27,19 @@ Tutorial Course의 목적에 대해서 알고 싶다면 https://github.com/iknow
 #### #uni_header_background 
 ```css
 #uni_header_background {
-  width: 100%; height: 50px;
-  background: rgba(0,38,32,0.90);
-  position: fixed;
-  z-index: 100;
+	width: 100%; height: 50px;
+	background: rgba(0,38,32,0.90);
+	position: fixed;
+	z-index: 100;
 }
 ```
 #### #uni_header_container
 ```css
 #uni_header_container {
-  width: 1800px; height: 50px;
-  margin: auto;
-  position: relative;
-  text-align: center;
+	width: 1800px; height: 50px;
+	margin: auto;
+	position: relative;
+	text-align: center;
 }
 ```
 ```css
