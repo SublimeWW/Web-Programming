@@ -111,6 +111,7 @@ background 레이어와 container 레이어를 구분하였기 때문에 단순�
 			Children
 		</div>
 	</div>
+```
 이런 현상은 부모 레이어에 2가지 이상의 속성이 있을 때 일어납니다. 하지만, 저희의 header에는 레이어 2층엔 4개의 요소(logo, nav, login, search) 가 있습니다. 따라서 div가 밀리는 것을 방지하기 위해서 중앙정렬을 해야하는 div(nav)를 제외한 나머지 div에는 position: absolute; 를 주었습니다. 이렇게 되면 nav가 나머지 요소에 영향을 받지 않아 밀리지 않게 됩니다.
 
 따라서 저희가 적용한 방법은 다음과 같습니다.
