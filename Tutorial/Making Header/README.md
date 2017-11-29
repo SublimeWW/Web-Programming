@@ -8,18 +8,20 @@ Tutorial Course의 목적에 대해서 알고 싶다면 https://github.com/iknow
 
 ### 1. 두 개의 Layer로 헤더를 구성하여 반응형 웹 구현을 더욱 쉽게 만들었습니다.
 
-이 헤더는 background와 container 레이어로 구성되어 있습니다. 물론 이 굳이 2개의 레이어로 쪼개지 않고서도 잘 작동하는 header를 만들 수 있습니다. 하지만 이 레이어를 둔 이유는 이 사이트의 반응형을 javascript를 최대한 고려하지 않고 만들기 위함입니다.
-
-현재 Pillow Studio 홈페이지를 background 레이어 없이 바로 만든다면, 반응형을 작업할 때, 로고, 검색 아이콘, 로그인 아이콘의 위치를 CSS의 calc 기능을 이용해서 만들어야 합니다. 
-
+이 헤더는 크게 background와 container 레이어로 구성되어 있습니다. 그 이유는 사이트의 반응형 모델을 javascript를 최대한 고려하지 않고 만들기 위함입니다. 레이어 구분없이 현재 홈페이지 레이아웃을 구현하려면 Container에 있는 모든 요소를 CSS calc()를 이용하여 구현해야 합니다.
 ##### #uni_header_background 
 ```css
-#uni_header_background {
-  width: 100%; height: 50px;
-  position: absolute; right: calc(50% + 1010px); top: 5px;
+#test_div {
+  position: absolute; right: calc(50% + 1010px);
 }
 ```
-이런식으로 말입니다. 이것의 문제는 크기가 지정되지 않은 div 모델인 경우, Javascript를 이용해서 left-margin을 계산해서 css 모델에 대입해야 한다는 것입니다. 이는 잘 작동하기도 힘들고 사이트의 구동속도도 느리게 만듭니다. 그래서 저희가 생각한 방법은 다음과 같습니다.
+이것의 문제는 크기가 지정되지 않은 div 모델(예를 들어 %로 사이즈를 지정)인 경우, Javascript를 이용하더라도 test_div를 원하는 곳에 위치시키기 힘듭니다. 따라서 저희가 생각해낸 방법은 다음과 같습니다.
+
+##### Layer를 2개로 나누고(부모 레이어: background, 자식 레이어: container), margin: auto; 속성을 통해 자식 레이어를 부모 레이어 안에서 가운데 정렬하는 것입니다.
+
+이 방법대로 홈페이지를 구성한다면 container내의 모든 요소들을 손쉽게 정렬시킬 수 있습니다. 그 이유는 요소들이 window기준에 맞춰지는 것이 아니라 container기준에 맞춰지기 때문입니다. 즉 container는 window기준으로 정렬하기 쉽고 Container내의 요소는 정렬하기 어렵기 때문에 위 방법으로 접근하면Container내의 요소들도 비교적 손쉽게 handling 할 수 있습니다.
+
+##### 따라서 이를 이용한 반응형 웹 모델은 다음과 같습니다.
 
 #### #uni_header_background 
 ```css
@@ -31,7 +33,6 @@ Tutorial Course의 목적에 대해서 알고 싶다면 https://github.com/iknow
 }
 ```
 #### #uni_header_container
-
 ```css
 #uni_header_container {
   width: 1800px; height: 50px;
@@ -40,44 +41,25 @@ Tutorial Course의 목적에 대해서 알고 싶다면 https://github.com/iknow
   text-align: center;
 }
 ```
-##### Layer를 2개로 나누고(부모 레이어: background, 자식 레이어: container), margin: auto; 속성을 통해 자식 레이어를 부모 레이어 안에서 가운데 정렬하는 것입니다. 
-
-이 방법대로 홈페이지를 구성한다면 홈페이지 내의 width가 정의되지 모든 요소들까지도 한번에 정렬시킬 수 있습니다. 이를 활용하여 만든 #uni_header_container의 반응형 웹 모델은 다음과 같습니다.
-
-#### #uni_header_container CSS 모델
-
 ```css
-#uni_header_container {
-  width: 100%; height: 50px;
-  background: rgba(0,38,32,0.90);
-  position: fixed;
-  z-index: 100;
-}
-
 @media (max-width: 1969px) and (min-width: 1000px){
 	#uni_header_container {
 		width: calc(100% - 140px);
+
 	}
 }
-
 @media (max-width: 999px) and (min-width: 905px){
 	#uni_header_container {
 		width: 825px;
 	}
 }
-
 @media (max-width: 904px) {
 	#uni_header_container {
 		width: calc(100% - 40px);
 	}
 }
 ```
-
 background 레이어와 container 레이어를 구분하였기 때문에 단순히 몇 줄만으로도 끊김없는 반응형 웹을 만들 수 있습니다.
-
-##### 즉 개발자는 #uni_header_container 안에서의 위치(상대적 위치)만 신경쓰면 된다는 것입니다.
-
-
 
 
 
