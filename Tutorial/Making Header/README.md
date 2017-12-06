@@ -227,7 +227,7 @@ Container내에 요소가 1개만 있을 땐 container안에 div가 잘 자리�
 
 ### 3. 자식 요소 위치가 부모 요소 위치에 영향을 받을 수 있도록 position: relative; 속성을 부모 요소에 적용하였습니다.
 
-코드를 꼼꼼이 보신 분이라면 위에서 position: relative; 속성을 부모 요소에 적용한 이유가 궁금할 것입니다. 그 이유는 position: absolute; 가 적용된 자식 요소를 부모 컨테이너에 영향을 받아야 하기 때문입니다. 예시로 #uni_header_logo로 설명드리겠습니다.
+코드를 꼼꼼이 보신 분이라면 위에서 position: relative; 속성을 부모 요소에 적용한 이유가 궁금할 것입니다. 그 이유는 position: absolute; 가 적용된 자식 요소를 부모 컨테이너를 기준으로 정렬하기 위함입니다. 즉 position: relative; 속성을 부모 요소에 적용하지 않으면 자식 요소의 위치가 부모 요소 기준이 아니라 window를 기준으로 정렬됩니다. 이는 #uni_header_logo로 설명드리겠습니다.
 
 #uni_header_container의 반응형 모델은 다음과 같습니다.
 
