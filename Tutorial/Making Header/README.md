@@ -1,3 +1,4 @@
+
 #  Header 디자인
 
 Tutorial Course의 목적에 대해서 알고 싶다면 https://github.com/iknowSteven/Web-Programming 의 README 를 읽어보십시오. Tutorial Course에서는 이 사이트의 주요 기능 구현에 대한 상세한 설명을 담고 있습니다. 자신의 실력이 충분하다고 생각하는 분은 바로 Source Code를 봐도 좋습니다.
@@ -8,91 +9,66 @@ Tutorial Course의 목적에 대해서 알고 싶다면 https://github.com/iknow
 
 ### 1. 두 개의 Layer로 헤더를 구성하여 반응형 웹 구현을 더욱 쉽게 만들었습니다.
 
-이 헤더는 background와 container 레이어로 구성되어 있습니다. 물론 이 굳이 2개의 레이어로 쪼개지 않고서도 잘 작동하는 header를 만들 수 있습니다. 하지만 이 레이어를 둔 이유는 이 사이트의 반응형을 javascript를 최대한 고려하지 않고 만들기 위함입니다.
-
-현재 Pillow Studio 홈페이지를 background 레이어 없이 바로 만든다면, 반응형을 작업할 때, 로고, 검색 아이콘, 로그인 아이콘의 위치를 CSS의 calc 기능을 이용해서 만들어야 합니다. 
-
+이 헤더는 크게 background와 container 레이어로 구성되어 있습니다. 그 이유는 사이트의 반응형 모델을 javascript를 최대한 고려하지 않고 만들기 위함입니다. 레이어 구분없이 현재 홈페이지 레이아웃을 구현하려면 Container에 있는 모든 요소를 CSS calc()를 이용하여 구현해야 합니다.
 ##### #uni_header_background 
 ```css
-#uni_header_background {
-  width: 100%; height: 50px;
-  position: absolute; right: calc(50% + 1010px); top: 5px;
+#test_div {
+	position: absolute; right: calc(50% + 1010px);
 }
 ```
-이런식으로 말입니다. 이것의 문제는 크기가 지정되지 않은 div 모델인 경우, Javascript를 이용해서 left-margin을 계산해서 css 모델에 대입해야 한다는 것입니다. 이는 잘 작동하기도 힘들고 사이트의 구동속도도 느리게 만듭니다. 그래서 저희가 생각한 방법은 다음과 같습니다.
+이것의 문제는 크기가 지정되지 않은 div 모델(예를 들어 %로 사이즈를 지정)인 경우, Javascript를 이용하더라도 test_div를 원하는 곳에 위치시키기 힘듭니다. 따라서 저희가 생각해낸 방법은 다음과 같습니다.
+
+##### Layer를 2개로 나누고(부모 레이어: background, 자식 레이어: container), margin: auto; 속성을 통해 자식 레이어를 부모 레이어 안에서 가운데 정렬하는 것입니다.
+
+이 방법대로 홈페이지를 구성한다면 container내의 모든 요소들을 손쉽게 정렬시킬 수 있습니다. 그 이유는 요소들이 window기준에 맞춰지는 것이 아니라 container기준에 맞춰지기 때문입니다. 즉 container는 window기준으로 정렬하기 쉽고 Container내의 요소는 정렬하기 어렵기 때문에 위 방법으로 접근하면Container내의 요소들도 비교적 손쉽게 handling 할 수 있습니다.
+
+##### 따라서 이를 이용한 반응형 웹 모델은 다음과 같습니다.
 
 #### #uni_header_background 
 ```css
 #uni_header_background {
-  width: 100%; height: 50px;
-  background: rgba(0,38,32,0.90);
-  position: fixed;
-  z-index: 100;
+	width: 100%; height: 50px;
+	background: rgba(0,38,32,0.90);
+	position: fixed;
+	z-index: 100;
 }
 ```
 #### #uni_header_container
-
 ```css
 #uni_header_container {
-  width: 1800px; height: 50px;
-  margin: auto;
-  position: relative;
-  text-align: center;
-}
-```
-##### Layer를 2개로 나누고(부모 레이어: background, 자식 레이어: container), margin: auto; 속성을 통해 자식 레이어를 부모 레이어 안에서 가운데 정렬하는 것입니다. 
-
-이 방법대로 홈페이지를 구성한다면 홈페이지 내의 width가 정의되지 모든 요소들까지도 한번에 정렬시킬 수 있습니다. 이를 활용하여 만든 #uni_header_container의 반응형 웹 모델은 다음과 같습니다.
-
-#### #uni_header_container CSS 모델
-
-```css
-#uni_header_container {
-  width: 100%; height: 50px;
-  background: rgba(0,38,32,0.90);
-  position: fixed;
-  z-index: 100;
+	width: 1800px; height: 50px;
+	margin: auto;
+	position: relative;
+	text-align: center;
 }
 
 @media (max-width: 1969px) and (min-width: 1000px){
 	#uni_header_container {
 		width: calc(100% - 140px);
+
 	}
 }
-
 @media (max-width: 999px) and (min-width: 905px){
 	#uni_header_container {
 		width: 825px;
 	}
 }
-
 @media (max-width: 904px) {
 	#uni_header_container {
 		width: calc(100% - 40px);
 	}
 }
 ```
-
 background 레이어와 container 레이어를 구분하였기 때문에 단순히 몇 줄만으로도 끊김없는 반응형 웹을 만들 수 있습니다.
 
-##### 즉 개발자는 #uni_header_container 안에서의 위치(상대적 위치)만 신경쓰면 된다는 것입니다.
 
+### 2. div container 안에 여러 요소를 배치했을 때 밀리는 현상을 방지하기 위해 position: absolute; 속성을 자식 요소에 사용하였습니다.
 
+이 부분은 처음 이 분야를 접하는 분들이 무조건 겪는 문제 중 하나입니다. div의 박스 모델의 특징은 div가 차지한 공간을 다른 div가 침범할 수 없다는 것입니다.
 
-
-
-### 2. div 안에 div를 밀리지않고 배치하기 위해 position: absolute; 를 자식 요소에 적용하였습니다.
-
-웹 개발자들이 처음 이 분야를 접할 때 맨 처음 고민하는 영역이기도 합니다. div의 박스 모델은 다른 여러 div가 겹쳐지지 못합니다. 그렇기에 개발자들이 div안에 div를 배치하기위해 사용하는 기법이 여러가지 있습니다.
-
-가장 많이 사용되어왔던것은 table cell처럼 div를 취급하는 방법입니다. 하지만 저희는 이 방법이 깔끔하다고 생각하지 않았기 때문에 다른 방법을 고안해냈습니다. 
-
-##### 바로 children div에 position absolute; 속성을 주는 것입니다.
-
-간단한 예제를 통해 보여드리겠습니다. 아래 코드는 Header Source 코드가 아닙니다.
+Container내에 요소가 1개만 있을 땐 container안에 div가 잘 자리잡고 있음을 알 수 있습니다.
 
 ##### #HTML
-
 ```html
 <div id="parent_1">
 	<div id="children_1">
@@ -103,38 +79,47 @@ background 레이어와 container 레이어를 구분하였기 때문에 단순�
 ##### #Parent_1
 ```css
 #Parent_1 {
-  width: 100%; height: 50px;
-  background: #FF0004;
+	width: 100%; height: 50px;
+	background: #FF0004;
 }
 ```
 ##### #Children_1
 ```css
 #Children_1 {
-  width: 100px; height: 50px;
-  margin: auto;
-  background: #001DFF;
-  color: #FFFFFF;
+	width: 100px; height: 50px;
+	background: #001DFF;
 }
 ```
-이렇게 레이어(div)를 설정하면 자식 레이어가 부모 요소 속에 잘 자리잡고 있음을 알 수 있습니다.
-
-하지만 아래의 경우엔 자식 레이어가 아래로 밀리게 됩니다.
+하지만 Contaier에 요소가 2가지 이상 존재하면 요소들이 순서대로 아래로 밀리게 됩니다.
 
 ##### HTML
-
-	<div id="parent_1">
-		Parent
-		<div id="children_1">
-			Children
-		</div>
+```html
+<div id="parent_1">
+	Parent
+	<div id="children_1">
+		Children
 	</div>
-이런 현상은 부모 레이어에 2가지 이상의 속성이 있을 때 일어납니다. 하지만, 저희의 header에는 레이어 2층엔 4개의 요소(logo, nav, login, search) 가 있습니다. 따라서 div가 밀리는 것을 방지하기 위해서 중앙정렬을 해야하는 div(nav)를 제외한 나머지 div에는 position: absolute; 를 주었습니다. 이렇게 되면 nav가 나머지 요소에 영향을 받지 않아 밀리지 않게 됩니다.
-
-따라서 저희가 적용한 방법은 다음과 같습니다.
+</div>
+```
+##### #Parent_1
+```css
+#Parent_1 {
+	width: 100%; height: 50px;
+	background: #FF0004;
+}
+```
+##### #Children_1
+```css
+#Children_1 {
+	width: 100px; height: 50px;
+	background: #001DFF;
+}
+```
+##### 그래서 저희는 container안에서 중앙 정렬이 아닌 요소들에 position: absolute; 속성을 줌으로서 해결하였습니다.
+저희의 header에는 4개의 요소(logo, nav, login, search) 가 있습니다. 즉 position: absolute가 없으면 container에서 요소들이 밀리게 됩니다. 따라서 div가 밀리는 것을 방지하기 위해서 중앙정렬을 해야하는 div(nav)를 제외한 나머지 div에는 position: absolute; 를 주었습니다.
 
 ##### HTML
-
-```
+```html
 <div id="parent_2">
 	<span id="children_absolute">Parent</span>
 	<div id="children_2">
@@ -142,24 +127,20 @@ background 레이어와 container 레이어를 구분하였기 때문에 단순�
 	</div>
 </div>
 ```
-
 ##### #Parent_2
-
 ```css
 #Parent_2 {
-  width: 100%; height: 50px;
-  background: #FF0004;
+	width: 100%; height: 50px;
+	background: #FF0004;
 }
 ```
-
 ##### #Children_2
-
 ```css
-#Children_2 {
-  width: 100px; height: 50px;
-  margin: auto;
-  background: #001DFF;
-  color: #FFFFFF;
+#Children_2
+	width: 100px; height: 50px;
+	margin: auto;
+	background: #001DFF;
+	color: #FFFFFF;
 }
 ```
 
@@ -167,14 +148,12 @@ background 레이어와 container 레이어를 구분하였기 때문에 단순�
 
 ```css
 #Children_absolute {
-  position: absolute;
+	position: absolute;
 }
 ```
-
-이렇게 이렇게 레이어를 설정하면 자식 레이어가 여러개가 있어도 모두 부모 요소 속에 잘 자리잡고 있음을 알 수 있습니다. 이를 활용한 저희 홈페이지 코드는 다음과 같습니다.
+##### 따라서 이를 이용한 헤더 모델은 다음과 같습니다.
 
 #### HTML
-
 ```html
 <header id="uni_header_background">
 	<div id="uni_header_container">
@@ -195,9 +174,7 @@ background 레이어와 container 레이어를 구분하였기 때문에 단순�
 	</div>
 </header>
 ```
-
 #### #uni_header_background
-
 ```css
 #uni_header_background {
 	width: 100%; height: 50px;
@@ -206,19 +183,16 @@ background 레이어와 container 레이어를 구분하였기 때문에 단순�
 	z-index: 100;
 }
 ```
-
 #### #uni_header_container
-
 ```css
 #uni_header_container {
-  width: 100%; height: 50px;
-  background: rgba(0,38,32,0.90);
-  position: fixed;
-  z-index: 100;
+	width: 100%; height: 50px;
+	background: rgba(0,38,32,0.90);
+	position: fixed;
+	z-index: 100;
 }
 ```
 #### #uni_header_nav_container
-
 ```css
 #uni_header_nav_container {
 	width: auto; height: 50px;
@@ -228,55 +202,42 @@ background 레이어와 container 레이어를 구분하였기 때문에 단순�
 	display: inline-block;
 }
 ```
-
 #### #uni_header_logo
-
 ```css
 #uni_header_logo {
-  width: auto; height: 30px;
-  position: absolute; left: 0px; top: 10px;
-  display: inline-block;
+	width: auto; height: 30px;
+	position: absolute; left: 0px; top: 10px;
+	display: inline-block;
 }
 ```
-
 #### #uni_header_login
-
 ```css
 #uni_header_login {
-  width: auto; height: 24px;
-  position: absolute; right: 70px; top: 13px;
+	width: auto; height: 24px;
+	position: absolute; right: 70px; top: 13px;
 }
 ```
-
 #### #uni_header_search
-
 ```css
 #uni_header_search {
-  width: auto; height: 24px;
-  position: absolute; right: 0px; top: 13px;
+	width: auto; height: 24px;
+	position: absolute; right: 0px; top: 13px;
 }
 ```
 
-이 때 position: relative; 를 부모 레이어에 적용한 이유는 다음 장에서 알려드리겠습니다.
+### 3. 자식 요소 위치가 부모 요소 위치에 영향을 받을 수 있도록 position: relative; 속성을 부모 요소에 적용하였습니다.
 
+코드를 꼼꼼이 보신 분이라면 위에서 position: relative; 속성을 부모 요소에 적용한 이유가 궁금할 것입니다. 그 이유는 position: absolute; 가 적용된 자식 요소를 부모 컨테이너를 기준으로 정렬하기 위함입니다. 즉 position: relative; 속성을 부모 요소에 적용하지 않으면 자식 요소의 위치가 부모 요소 기준이 아니라 window를 기준으로 정렬됩니다. 이는 #uni_header_logo로 설명드리겠습니다.
 
+#uni_header_container의 반응형 모델은 다음과 같습니다.
 
-
-
-### 3. 자식 레이어를 부모 레이어 정렬에 맞추기 위해 position: relative; 를 부모요소에 적용하였습니다.
-
-위에서 position: relative; 를 부모 레이어에 적용한 이유가 궁금할 것입니다. 그 이유는 position: absolute; 가 적용된 자식 요소를 부모 컨테이너에 영향을 받아야 하기 때문입니다. 예시로 #uni_header_logo로 설명드리겠습니다. position: absolute; 속성을 갖는 자식 요소는 모두 이와 같은 원리로 만들어졌습니다.
-
-현재 #uni_header_container의 반응형 웹 설계는 다음과 같습니다.
-
-#### #uni_header_container CSS 모델
-
+#### #uni_header_container
 ```css
 #uni_header_container {
-  width: 100%; height: 50px;
-  background: rgba(0,38,32,0.90);
-  position: fixed;
-  z-index: 100;
+	width: 100%; height: 50px;
+	background: rgba(0,38,32,0.90);
+	position: fixed;
+	z-index: 100;
 }
 
 @media (max-width: 1969px) and (min-width: 1000px){
@@ -301,14 +262,13 @@ background 레이어와 container 레이어를 구분하였기 때문에 단순�
 위 모델을 요약해서 설명하면 다음과 같습니다.
 
 1. ~1970px: #uni_header_container(이하 Container)의 크기: 1800px, 화면 가운데 정렬.
-2. 1969px~1000px: Container의 크기: 화면 크기-140px, 화면 가운데 정렬, 좌우 여백 각각 70px.
-3. 999px~905px: Conainer의 크기: 825px,  화면 가운데 정렬, 좌우 여백이 70px에서 화면을 줄임에 따라 부드럽게 20px까지 줄어듬.
-4. 904px~: Container의 크기: 화면 크기-40px, 화면 가운데 정렬, 좌우 여백 각각 20px.
+2. 1969px~1000px: Container의 크기: Window(화면 크기) - 140px, 화면 가운데 정렬, 좌우 여백 각각 70px.
+3. 999px~905px: Conainer의 크기: 825px, 화면 가운데 정렬, 좌우 여백이 70px에서 화면을 줄임에 따라 부드럽게 20px까지 줄어.
+4. 904px~: Container의 크기: Window - 40px, 화면 가운데 정렬, 좌우 여백 각각 20px.
 
 그 다음, #uni_header_logo의 반응형 웹 설계는 다음과 같습니다.
 
-#### #uni_header_logo CSS 모델
-
+#### #uni_header_logo
 ```css
 @media (min-width: 905px) {
 	#uni_header_logo {
@@ -317,29 +277,14 @@ background 레이어와 container 레이어를 구분하였기 때문에 단순�
 		display: inline-block;
 	}
 } 
-
-@media (max-width: 904px) {
-	#uni_header_logo {
-		width: auto; height: 30px;
-		margin-top: 10px;
-	}
-}
 ```
 
-위 모델을 요약해서 설명하면 다음과 같습니다.
+위 모델을 요약해서 설명하면 다음과 같습니다. (실제 소스코드에는 904px 이하 부분도 정의되어 있으나 이 부분은 모바일 용이기 때문에 무시해도 됩니다)
 
-1. ~905px: Container요소(Background 아님)의 왼쪽에 딱 붙입니다.
-2. 904px~: Container요소의  중앙에 배치합니다.
+1. ~905px: Container요소(Window 아님)의 왼쪽에 딱 붙입니다.
+2. 904px~: Container요소의 중앙에 배치합니다.
 
-여기서 904px 이하 부분은 모바일 페이지 용이기 때문에 무시해도 됩니다. 여기서 집중해야 하는 부분은 905px 이상부분 입니다.
-
-##### 만약 #uni_header_container(이하 Container)에 position: relative; 속성을 없앤다면, #uni_header_logo(이하 Logo)에 position:absolute; 속성이 있기 때문에 Logo가 Container의 위치를 무시하고 무조건 화면의 맨 왼쪽으로 가게 됩니다.
-
-##### 즉, Logo가 Container의 위치에 영향을 받게 하기 위해 Container에 position: relative; 속성을 넣었습니다.
-
-
-
-
+##### 만약 #uni_header_container(이하 Container)에 position: relative; 속성을 없앤다면 브라우저는 Logo의 위치를 Container 기준 left: 0px이 아닌 Window 기준 left: 0px 로 인식합니다. (이는 자식 요소에 position: absolute; 속성을 적용하였기 때문입니다)
 
 ### 4. #uni_header_nav_container의 글자에 마우스를 hover 시켰을 때 색 변화를 Fade-in, Fade-Out 하기 위해 CSS Transtion 속성을 이용하였습니다.
 
